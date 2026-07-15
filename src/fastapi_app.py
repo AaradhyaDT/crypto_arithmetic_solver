@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
-from crypto_arithmetic_solver import solve_cryptarithmetic_optimized
+from src.crypto_arithmetic_solver import solve_cryptarithmetic_optimized
 
 app = FastAPI()
 

@@ -59,6 +59,16 @@ This repository contains `crypto_arithmetic_solver.py` (import-ready name), a pr
 
 This mirrors the way a human solves alphametics and vastly reduces the explored state space.
 
+## Key files and locations
+
+- `src/` — library code and FastAPI app (`crypto_arithmetic_solver.py`, `fastapi_app.py`).
+- `tests/` — test suite (moved `test_crypto_solver.py` and `run_unit_tests.py`).
+- `tools/` — helper scripts (`print_solution.py`, `check_puzzles.py`, etc.).
+- `solve_with_metrics.ps1` — interactive PowerShell helper (prints output and writes JSON to `reports/`).
+- `reports/` — generated JSON reports (one per run), and aggregated metrics.
+
+If you reorganize files, ensure `src` remains a package (has `__init__.py`) so tests and tools can import `src.crypto_arithmetic_solver`.
+
 ## Public API
 
 - `solve_cryptarithmetic_optimized(word1: str, word2: str, result: str) -> Optional[Dict[str, int]]`
