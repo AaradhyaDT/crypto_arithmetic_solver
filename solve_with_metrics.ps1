@@ -24,7 +24,7 @@ $cli = Join-Path $scriptDir 'cli.py'
 $cmd = @($python, $cli, 'solve', $Word1, $Word2, $Result, '--metrics-json', $jsonPath, '--timeout', $Timeout.ToString())
 if ($All) { $cmd += '--all' }
 
-Write-Host "Running solver for: $Word1 + $Word2 = $Result (timeout=${Timeout}s)" -ForegroundColor Cyan
+Write-Host ("Running solver for: {0} + {1} = {2} (timeout={3}s)" -f $Word1, $Word2, $Result, $Timeout) -ForegroundColor Cyan
 
 # Execute
 $proc = Start-Process -FilePath $python -ArgumentList @($cli, 'solve', $Word1, $Word2, $Result, '--metrics-json', $jsonPath, '--timeout', $Timeout.ToString()) -NoNewWindow -Wait -PassThru
@@ -68,7 +68,7 @@ else {
 
     # Print numeric values if possible (safe lookups)
     $map = @{}
-    foreach ($p in $first.PSObject.Properties) { $map[[string]$p.Name] = $p.Value }
+    foreach ($p in $first.PSObject.Properties) { $map[$($p.Name)] = $p.Value }
     $builtOk = $true
     try {
         $n1 = ""
@@ -100,15 +100,15 @@ else {
 
     Write-Host "Mapping:"
     foreach ($k in ($first.PSObject.Properties.Name | Sort-Object)) {
-        $v = $first.PSObject.Properties[$k].Value
-        Write-Host "  $k -> $v"
+        $v = $first.$k
+        Write-Host ("  {0} -> {1}" -f $k, $v)
     }
 }
 
 Write-Host "\n=== Metrics ===" -ForegroundColor Green
 foreach ($k in $metrics.PSObject.Properties.Name) {
-    $val = $metrics.PSObject.Properties[$k].Value
-    Write-Host "  $k`t$val"
+    $val = $metrics.$k
+    Write-Host ("  {0}`t{1}" -f $k, $val)
 }
 
 # Clean up the temp JSON

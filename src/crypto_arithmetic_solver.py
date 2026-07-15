@@ -1,5 +1,69 @@
-from typing import Dict, Optional, List, Union, Tuple
+from typing import Dict, Optional, List, Union, Tuple, overload
+try:
+    from typing import Literal
+except Exception:
+    from typing_extensions import Literal
 import time
+
+
+@overload
+def solve_cryptarithmetic_optimized(
+    word1: str,
+    word2: str,
+    result: str,
+    *,
+    return_all: Literal[False] = ...,
+    max_solutions: Optional[int] = ...,
+    timeout: Optional[float] = ...,
+    max_calls: Optional[int] = ...,
+    collect_metrics: Literal[True],
+) -> Tuple[Optional[Dict[str, int]], Dict[str, Union[int, float]]]:
+    ...
+
+
+@overload
+def solve_cryptarithmetic_optimized(
+    word1: str,
+    word2: str,
+    result: str,
+    *,
+    return_all: Literal[True],
+    max_solutions: Optional[int] = ...,
+    timeout: Optional[float] = ...,
+    max_calls: Optional[int] = ...,
+    collect_metrics: Literal[True],
+) -> Tuple[List[Dict[str, int]], Dict[str, Union[int, float]]]:
+    ...
+
+
+@overload
+def solve_cryptarithmetic_optimized(
+    word1: str,
+    word2: str,
+    result: str,
+    *,
+    return_all: Literal[False] = ...,
+    max_solutions: Optional[int] = ...,
+    timeout: Optional[float] = ...,
+    max_calls: Optional[int] = ...,
+    collect_metrics: Literal[False] = ...,
+) -> Optional[Dict[str, int]]:
+    ...
+
+
+@overload
+def solve_cryptarithmetic_optimized(
+    word1: str,
+    word2: str,
+    result: str,
+    *,
+    return_all: Literal[True],
+    max_solutions: Optional[int] = ...,
+    timeout: Optional[float] = ...,
+    max_calls: Optional[int] = ...,
+    collect_metrics: Literal[False] = ...,
+) -> List[Dict[str, int]]:
+    ...
 
 
 def solve_cryptarithmetic_optimized(
