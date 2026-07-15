@@ -27,10 +27,11 @@ def main() -> None:
     metrics = data.get('metrics', {})
 
     # solutions may be a dict (single mapping) or a list
+    fastest_idx = metrics.get('fastest_solution_index', 0)
     if isinstance(sols, dict):
         mapping = sols
     elif isinstance(sols, list) and sols:
-        mapping = sols[0]
+        mapping = sols[fastest_idx] if fastest_idx < len(sols) else sols[0]
     else:
         mapping = None
 
@@ -54,8 +55,33 @@ def main() -> None:
             if n1.isdigit() and n2.isdigit() and nr.isdigit():
                 print(f'\nCheck: {n1} + {n2} = {nr} -> {int(n1) + int(n2) == int(nr)}')
 
+    leading_bound = metrics.get('leading_bound')
+    if leading_bound:
+        print('\n=== Deduced Bound (before search) ===')
+        print(f"  Column {leading_bound['column']}: {leading_bound['note']}")
+
+    reasoning_steps = metrics.get('reasoning_steps')
+    if reasoning_steps:
+        print('\n=== Reasoning (why each digit) ===')
+        for step in reasoning_steps:
+            if step['reason'] == 'forced':
+                print(f"  Column {step['column']} [{step['role']}]: {step['char']} = {step['chosen']} -- {step['note']}")
+            else:
+                print(f"  Column {step['column']} [{step['role']}]: {step['char']} = {step['chosen']}")
+                for e in step.get('eliminated', []):
+                    print(f"      ruled out {e['digit']}: {e['reason']}")
+
+    solution_steps = metrics.get('solution_steps')
+    if solution_steps:
+        print('\n=== Solving Steps ===')
+        for step in solution_steps:
+            print(f"  Column {step['column']}: {step['equation']}")
+
     print('\n=== Metrics ===')
+    skip_keys = {'solution_steps', 'reasoning_steps', 'leading_bound', 'fastest_solution_index'}
     for k in sorted(metrics.keys()):
+        if k in skip_keys:
+            continue
         print(f'  {k}: {metrics[k]}')
 
 

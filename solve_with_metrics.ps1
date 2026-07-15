@@ -65,11 +65,17 @@ if ($null -eq $sols) {
     Write-Host "No solution found."
 }
 else {
+    $fastestIdx = 0
+    if ($null -ne $metrics.fastest_solution_index) { $fastestIdx = $metrics.fastest_solution_index }
+
     if ($sols -is [System.Collections.IEnumerable] -and $sols -isnot [string]) {
         # list of solutions
         $count = $sols.Count
         Write-Host "Solutions found: $count" -ForegroundColor Yellow
-        $first = $sols[0]
+        $first = $sols[$fastestIdx]
+        if ($fastestIdx -ne 0) {
+            Write-Host "Showing fastest-found solution (index $fastestIdx of $count)" -ForegroundColor DarkYellow
+        }
     }
     else {
         $first = $sols
@@ -115,19 +121,39 @@ else {
     }
 }
 
-Write-Host "`n=== Solving Steps (optimal derivation) ===" -ForegroundColor Green
-if ($metrics.PSObject.Properties.Name -contains 'solution_steps' -and $metrics.solution_steps -and $metrics.solution_steps.Count -gt 0) {
-    foreach ($step in $metrics.solution_steps) {
-        Write-Host ("  {0}. {1}" -f ($step.column + 1), $step.description)
+if ($null -ne $metrics.leading_bound) {
+    Write-Host "`n=== Deduced Bound (before search) ===" -ForegroundColor Green
+    Write-Host ("  Column {0}: {1}" -f $metrics.leading_bound.column, $metrics.leading_bound.note)
+}
+
+if ($null -ne $metrics.reasoning_steps) {
+    Write-Host "`n=== Reasoning (why each digit) ===" -ForegroundColor Green
+    foreach ($step in $metrics.reasoning_steps) {
+        if ($step.reason -eq 'forced') {
+            Write-Host ("  Column {0} [{1}]: {2} = {3} -- {4}" -f $step.column, $step.role, $step.char, $step.chosen, $step.note)
+        }
+        else {
+            Write-Host ("  Column {0} [{1}]: {2} = {3}" -f $step.column, $step.role, $step.char, $step.chosen)
+            if ($step.eliminated -and $step.eliminated.Count -gt 0) {
+                foreach ($e in $step.eliminated) {
+                    Write-Host ("      ruled out {0}: {1}" -f $e.digit, $e.reason)
+                }
+            }
+        }
     }
 }
-else {
-    Write-Host "  No step-by-step derivation available."
+
+if ($null -ne $metrics.solution_steps) {
+    Write-Host "`n=== Solving Steps ===" -ForegroundColor Green
+    foreach ($step in $metrics.solution_steps) {
+        Write-Host ("  Column {0}: {1}" -f $step.column, $step.equation)
+    }
 }
 
 Write-Host "`n=== Metrics ===" -ForegroundColor Green
+$skipKeys = @('solution_steps', 'reasoning_steps', 'leading_bound', 'fastest_solution_index')
 foreach ($k in $metrics.PSObject.Properties.Name) {
-    if ($k -eq 'solution_steps') { continue }
+    if ($skipKeys -contains $k) { continue }
     $val = $metrics.$k
     Write-Host ("  {0}`t{1}" -f $k, $val)
 }
