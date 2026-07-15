@@ -115,8 +115,19 @@ else {
     }
 }
 
+Write-Host "`n=== Solving Steps (optimal derivation) ===" -ForegroundColor Green
+if ($metrics.PSObject.Properties.Name -contains 'solution_steps' -and $metrics.solution_steps -and $metrics.solution_steps.Count -gt 0) {
+    foreach ($step in $metrics.solution_steps) {
+        Write-Host ("  {0}. {1}" -f ($step.column + 1), $step.description)
+    }
+}
+else {
+    Write-Host "  No step-by-step derivation available."
+}
+
 Write-Host "`n=== Metrics ===" -ForegroundColor Green
 foreach ($k in $metrics.PSObject.Properties.Name) {
+    if ($k -eq 'solution_steps') { continue }
     $val = $metrics.$k
     Write-Host ("  {0}`t{1}" -f $k, $val)
 }

@@ -31,6 +31,38 @@ The script prints the found mapping and metrics to the console and writes a repo
 ```python tests/run_unit_tests.py
 ```
 
+- Use the virtual environment:
+
+PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+CMD:
+
+```cmd
+.venv\Scripts\activate
+```
+
+macOS / WSL:
+
+```bash
+source .venv/bin/activate
+```
+
+Or use the helper script:
+
+```powershell
+.\tools\activate_venv.ps1
+```
+
+After activation, install dependencies with:
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Crypto Arithmetic solver.py
 
 ## Overview

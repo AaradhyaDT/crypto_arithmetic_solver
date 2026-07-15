@@ -6,6 +6,72 @@ except Exception:
 import time
 
 
+def derive_solution_steps(word1: str, word2: str, result: str, mapping: Dict[str, int]) -> List[Dict[str, Union[int, str]]]:
+    """Reconstruct a human-readable, column-by-column derivation for an already-found solution.
+
+    Replays the accepted mapping right-to-left (units column first, matching how the
+    solver actually works) and explains each column's arithmetic. Contains no
+    backtracked/rejected attempts -- only the final, accepted values.
+
+    Returns a list of step dicts, one per column, e.g.:
+        {
+            "column": 0,
+            "description": "column 0 (units): D + E = 7 + 5 = 12 -> digit 2, carry 1",
+            "carry_in": 0,
+            "carry_out": 1,
+            "digit": 2,
+        }
+    """
+    w1, w2, w3 = word1.upper()[::-1], word2.upper()[::-1], result.upper()[::-1]
+    steps: List[Dict[str, Union[int, str]]] = []
+    carry = 0
+    col_names = ["units", "tens", "hundreds", "thousands", "ten-thousands"]
+
+    for col in range(len(w3)):
+        ch0 = w1[col] if col < len(w1) else None
+        ch1 = w2[col] if col < len(w2) else None
+        ch_res = w3[col]
+
+        d0 = mapping[ch0] if ch0 is not None else None
+        d1 = mapping[ch1] if ch1 is not None else None
+        d_res = mapping[ch_res]
+
+        col_sum = carry + (d0 or 0) + (d1 or 0)
+        next_carry = col_sum // 10
+
+        place = col_names[col] if col < len(col_names) else f"10^{col}"
+
+        terms = []
+        if d0 is not None:
+            terms.append(f"{ch0}({d0})")
+        if d1 is not None:
+            terms.append(f"{ch1}({d1})")
+        addends_str = " + ".join(terms)
+
+        if terms:
+            carry_str = f" + carry {carry}" if carry else ""
+            lhs = f"{addends_str}{carry_str}"
+        else:
+            lhs = f"carry {carry}"
+
+        description = (
+            f"column {col} ({place}): {lhs} = {col_sum} "
+            f"-> {ch_res} = {d_res}, carry {next_carry}"
+        )
+
+        steps.append({
+            "column": col,
+            "description": description,
+            "carry_in": carry,
+            "carry_out": next_carry,
+            "digit": d_res,
+        })
+
+        carry = next_carry
+
+    return steps
+
+
 @overload
 def solve_cryptarithmetic_optimized(
     word1: str,
@@ -17,7 +83,7 @@ def solve_cryptarithmetic_optimized(
     timeout: Optional[float] = ...,
     max_calls: Optional[int] = ...,
     collect_metrics: Literal[True],
-) -> Tuple[Optional[Dict[str, int]], Dict[str, Union[int, float]]]:
+) -> Tuple[Optional[Dict[str, int]], Dict[str, Union[int, float, List[Dict[str, Union[int, str]]]]]]:
     ...
 
 
@@ -32,7 +98,7 @@ def solve_cryptarithmetic_optimized(
     timeout: Optional[float] = ...,
     max_calls: Optional[int] = ...,
     collect_metrics: Literal[True],
-) -> Tuple[List[Dict[str, int]], Dict[str, Union[int, float]]]:
+) -> Tuple[List[Dict[str, int]], Dict[str, Union[int, float, List[Dict[str, Union[int, str]]]]]]:
     ...
 
 
@@ -78,8 +144,8 @@ def solve_cryptarithmetic_optimized(
 ) -> Union[
     Optional[Dict[str, int]],
     List[Dict[str, int]],
-    Tuple[Optional[Dict[str, int]], Dict[str, Union[int, float]]],
-    Tuple[List[Dict[str, int]], Dict[str, Union[int, float]]],
+    Tuple[Optional[Dict[str, int]], Dict[str, Union[int, float, List[Dict[str, Union[int, str]]]]]],
+    Tuple[List[Dict[str, int]], Dict[str, Union[int, float, List[Dict[str, Union[int, str]]]]]],
 ]:
     """
     Column-wise cryptarithmetic solver with production safety features.
@@ -217,12 +283,14 @@ def solve_cryptarithmetic_optimized(
     solve(0, 0, 0)
 
     elapsed = time.monotonic() - start_time
+    best_solution = solutions[0] if solutions else None
     metrics = {
         "elapsed_seconds": elapsed,
         "recursive_calls": calls,
         "assignments": assignments,
         "backtracks": backtracks,
         "solutions_found": len(solutions),
+        "solution_steps": derive_solution_steps(word1, word2, result, best_solution) if best_solution else [],
     }
 
     if collect_metrics:
