@@ -41,7 +41,8 @@ if (-not (Test-Path $jsonPath)) {
 # Read and display
 try {
     $data = Get-Content $jsonPath -Raw | ConvertFrom-Json
-} catch {
+}
+catch {
     Write-Host "Failed to read JSON: $_" -ForegroundColor Red
     exit 1
 }
@@ -52,35 +53,55 @@ $metrics = $data.metrics
 Write-Host "\n=== Solution Summary ===" -ForegroundColor Green
 if ($null -eq $sols) {
     Write-Host "No solution found."
-} else {
+}
+else {
     if ($sols -is [System.Collections.IEnumerable] -and $sols -isnot [string]) {
         # list of solutions
         $count = $sols.Count
         Write-Host "Solutions found: $count" -ForegroundColor Yellow
         $first = $sols[0]
-    } else {
+    }
+    else {
         $first = $sols
         Write-Host "Solutions found: 1" -ForegroundColor Yellow
     }
 
-    # Print numeric values if possible
+    # Print numeric values if possible (safe lookups)
     $map = @{}
-    foreach ($p in $first.PSObject.Properties) { $map[$p.Name] = $p.Value }
+    foreach ($p in $first.PSObject.Properties) { $map[[string]$p.Name] = $p.Value }
+    $builtOk = $true
     try {
         $n1 = ""
-        foreach ($ch in $Word1.ToCharArray()) { $n1 += [string]$map[$ch] }
-        $n2 = ""
-        foreach ($ch in $Word2.ToCharArray()) { $n2 += [string]$map[$ch] }
-        $nr = ""
-        foreach ($ch in $Result.ToCharArray()) { $nr += [string]$map[$ch] }
-        Write-Host "$n1 + $n2 = $nr" -ForegroundColor Magenta
-    } catch {
-        # fallback: print mapping
+        foreach ($ch in $Word1.ToCharArray()) {
+            $key = [string]$ch
+            if ($map.ContainsKey($key)) { $n1 += [string]$map[$key] } else { $builtOk = $false; break }
+        }
+        if ($builtOk) {
+            $n2 = ""
+            foreach ($ch in $Word2.ToCharArray()) {
+                $key = [string]$ch
+                if ($map.ContainsKey($key)) { $n2 += [string]$map[$key] } else { $builtOk = $false; break }
+            }
+        }
+        if ($builtOk) {
+            $nr = ""
+            foreach ($ch in $Result.ToCharArray()) {
+                $key = [string]$ch
+                if ($map.ContainsKey($key)) { $nr += [string]$map[$key] } else { $builtOk = $false; break }
+            }
+        }
+        if ($builtOk -and $n1 -ne "" -and $n2 -ne "" -and $nr -ne "") {
+            Write-Host "$n1 + $n2 = $nr" -ForegroundColor Magenta
+        }
+    }
+    catch {
+        # fallback: print mapping if numeric construction fails
     }
 
     Write-Host "Mapping:"
     foreach ($k in ($first.PSObject.Properties.Name | Sort-Object)) {
-        Write-Host "  $k -> $($first.$k)"
+        $v = $first.PSObject.Properties[$k].Value
+        Write-Host "  $k -> $v"
     }
 }
 
