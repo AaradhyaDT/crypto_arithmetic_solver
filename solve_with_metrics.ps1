@@ -155,6 +155,9 @@ $skipKeys = @('solution_steps', 'reasoning_steps', 'leading_bound', 'fastest_sol
 foreach ($k in $metrics.PSObject.Properties.Name) {
     if ($skipKeys -contains $k) { continue }
     $val = $metrics.$k
+    if ($k -eq 'elapsed_seconds') {
+        $val = "{0:N6}" -f [double]$val
+    }
     Write-Host ("  {0}`t{1}" -f $k, $val)
 }
 
