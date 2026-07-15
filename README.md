@@ -114,6 +114,33 @@ Example run output (sample):
 - Add a `timeout` parameter or limit on recursive calls to prevent long-running requests in a service environment.
 - Consider renaming the file to `crypto_arithmetic_solver.py` for import convenience.
 
+## Deployment & FastAPI
+
+A lightweight FastAPI app is provided in `src/fastapi_app.py` for remote solving.
+
+- Run the API locally with `uvicorn` for development:
+
+```bash
+python -m pip install -r requirements.txt  # installs FastAPI + uvicorn if missing
+uvicorn src.fastapi_app:app --reload --host 0.0.0.0 --port 8000
+```
+
+- Example cURL request to solve a puzzle (returns solutions):
+
+```bash
+curl -X POST "http://127.0.0.1:8000/solve?metrics=1" -H "Content-Type: application/json" \
+   -d '{"word1":"SEND","word2":"MORE","result":"MONEY"}'
+```
+
+- Docker (simple) — run the app in a container:
+
+```bash
+docker build -t crypto-solver .
+docker run -p 8000:8000 crypto-solver
+```
+
+For production, use a process manager (systemd) or an ASGI server behind a reverse proxy (NGINX) and add request timeouts and resource limits. The FastAPI endpoint supports `?metrics=1` to include solver metrics in the JSON response.
+
 ## Contribution
 
 If you want me to:
