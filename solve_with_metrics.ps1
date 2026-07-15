@@ -3,7 +3,7 @@ Param(
     [string]$Word2,
     [string]$Result,
     [switch]$All,
-    [int]$Timeout = 2
+    [double]$Timeout = 2
 )
 
 # Prompt if any are missing
@@ -21,13 +21,23 @@ $jsonPath = Join-Path $reportsDir "solution_$guid.json"
 # Build command
 $python = "python"
 $cli = Join-Path $scriptDir 'cli.py'
-$cmd = @($python, $cli, 'solve', $Word1, $Word2, $Result, '--metrics-json', $jsonPath, '--timeout', $Timeout.ToString())
-if ($All) { $cmd += '--all' }
 
-Write-Host "Running solver for: $Word1 + $Word2 = $Result (timeout=${Timeout}s)" -ForegroundColor Cyan
+if (-not (Get-Command $python -ErrorAction SilentlyContinue)) {
+    Write-Host "Python executable '$python' not found on PATH." -ForegroundColor Red
+    exit 1
+}
+if (-not (Test-Path $cli)) {
+    Write-Host "cli.py not found at $cli" -ForegroundColor Red
+    exit 1
+}
 
-# Execute
-$proc = Start-Process -FilePath $python -ArgumentList @($cli, 'solve', $Word1, $Word2, $Result, '--metrics-json', $jsonPath, '--timeout', $Timeout.ToString()) -NoNewWindow -Wait -PassThru
+$argList = @($cli, 'solve', $Word1, $Word2, $Result, '--metrics-json', $jsonPath, '--timeout', $Timeout.ToString())
+if ($All) { $argList += '--all' }
+
+Write-Host ("Running solver for: {0} + {1} = {2} (timeout={3}s)" -f $Word1, $Word2, $Result, $Timeout) -ForegroundColor Cyan
+
+# Execute (run from $scriptDir so relative paths inside cli.py/src resolve regardless of caller's CWD)
+$proc = Start-Process -FilePath $python -ArgumentList $argList -WorkingDirectory $scriptDir -NoNewWindow -Wait -PassThru
 if ($proc.ExitCode -ne 0) {
     Write-Host "Solver process exited with code $($proc.ExitCode)" -ForegroundColor Red
     exit $proc.ExitCode
@@ -41,7 +51,8 @@ if (-not (Test-Path $jsonPath)) {
 # Read and display
 try {
     $data = Get-Content $jsonPath -Raw | ConvertFrom-Json
-} catch {
+}
+catch {
     Write-Host "Failed to read JSON: $_" -ForegroundColor Red
     exit 1
 }
@@ -49,48 +60,68 @@ try {
 $sols = $data.solutions
 $metrics = $data.metrics
 
-Write-Host "\n=== Solution Summary ===" -ForegroundColor Green
+Write-Host "`n=== Solution Summary ===" -ForegroundColor Green
 if ($null -eq $sols) {
     Write-Host "No solution found."
-} else {
+}
+else {
     if ($sols -is [System.Collections.IEnumerable] -and $sols -isnot [string]) {
         # list of solutions
         $count = $sols.Count
         Write-Host "Solutions found: $count" -ForegroundColor Yellow
         $first = $sols[0]
-    } else {
+    }
+    else {
         $first = $sols
         Write-Host "Solutions found: 1" -ForegroundColor Yellow
     }
 
-    # Print numeric values if possible
+    # Print numeric values if possible (safe lookups)
     $map = @{}
-    foreach ($p in $first.PSObject.Properties) { $map[$p.Name] = $p.Value }
+    foreach ($p in $first.PSObject.Properties) { $map[[string]$p.Name] = $p.Value }
+    $builtOk = $true
     try {
         $n1 = ""
-        foreach ($ch in $Word1.ToCharArray()) { $n1 += [string]$map[$ch] }
-        $n2 = ""
-        foreach ($ch in $Word2.ToCharArray()) { $n2 += [string]$map[$ch] }
-        $nr = ""
-        foreach ($ch in $Result.ToCharArray()) { $nr += [string]$map[$ch] }
-        Write-Host "$n1 + $n2 = $nr" -ForegroundColor Magenta
-    } catch {
-        # fallback: print mapping
+        foreach ($ch in $Word1.ToCharArray()) {
+            $key = [string]$ch
+            if ($map.ContainsKey($key)) { $n1 += [string]$map[$key] } else { $builtOk = $false; break }
+        }
+        if ($builtOk) {
+            $n2 = ""
+            foreach ($ch in $Word2.ToCharArray()) {
+                $key = [string]$ch
+                if ($map.ContainsKey($key)) { $n2 += [string]$map[$key] } else { $builtOk = $false; break }
+            }
+        }
+        if ($builtOk) {
+            $nr = ""
+            foreach ($ch in $Result.ToCharArray()) {
+                $key = [string]$ch
+                if ($map.ContainsKey($key)) { $nr += [string]$map[$key] } else { $builtOk = $false; break }
+            }
+        }
+        if ($builtOk -and $n1 -ne "" -and $n2 -ne "" -and $nr -ne "") {
+            Write-Host "$n1 + $n2 = $nr" -ForegroundColor Magenta
+        }
+    }
+    catch {
+        # fallback: print mapping if numeric construction fails
     }
 
     Write-Host "Mapping:"
     foreach ($k in ($first.PSObject.Properties.Name | Sort-Object)) {
-        Write-Host "  $k -> $($first.$k)"
+        $v = $first.$k
+        Write-Host ("  {0} -> {1}" -f $k, $v)
     }
 }
 
-Write-Host "\n=== Metrics ===" -ForegroundColor Green
+Write-Host "`n=== Metrics ===" -ForegroundColor Green
 foreach ($k in $metrics.PSObject.Properties.Name) {
-    $val = $metrics.PSObject.Properties[$k].Value
-    Write-Host "  $k`t$val"
+    $val = $metrics.$k
+    Write-Host ("  {0}`t{1}" -f $k, $val)
 }
 
 # Clean up the temp JSON
 # Remove-Item $jsonPath -ErrorAction SilentlyContinue
 
-Write-Host "\nReport written to: $jsonPath" -ForegroundColor DarkGreen
+Write-Host "`nReport written to: $jsonPath" -ForegroundColor DarkGreen

@@ -59,6 +59,16 @@ This repository contains `crypto_arithmetic_solver.py` (import-ready name), a pr
 
 This mirrors the way a human solves alphametics and vastly reduces the explored state space.
 
+## Key files and locations
+
+- `src/` — library code and FastAPI app (`crypto_arithmetic_solver.py`, `fastapi_app.py`).
+- `tests/` — test suite (moved `test_crypto_solver.py` and `run_unit_tests.py`).
+- `tools/` — helper scripts (`print_solution.py`, `check_puzzles.py`, etc.).
+- `solve_with_metrics.ps1` — interactive PowerShell helper (prints output and writes JSON to `reports/`).
+- `reports/` — generated JSON reports (one per run), and aggregated metrics.
+
+If you reorganize files, ensure `src` remains a package (has `__init__.py`) so tests and tools can import `src.crypto_arithmetic_solver`.
+
 ## Public API
 
 - `solve_cryptarithmetic_optimized(word1: str, word2: str, result: str) -> Optional[Dict[str, int]]`
@@ -113,6 +123,33 @@ Example run output (sample):
 - Heuristics such as Most-Restricted-Variable (MRV) or ordering digits by likelihood (e.g., prefer digits that keep carries consistent) can further speed up hard puzzles.
 - Add a `timeout` parameter or limit on recursive calls to prevent long-running requests in a service environment.
 - Consider renaming the file to `crypto_arithmetic_solver.py` for import convenience.
+
+## Deployment & FastAPI
+
+A lightweight FastAPI app is provided in `src/fastapi_app.py` for remote solving.
+
+- Run the API locally with `uvicorn` for development:
+
+```bash
+python -m pip install -r requirements.txt  # installs FastAPI + uvicorn if missing
+uvicorn src.fastapi_app:app --reload --host 0.0.0.0 --port 8000
+```
+
+- Example cURL request to solve a puzzle (returns solutions):
+
+```bash
+curl -X POST "http://127.0.0.1:8000/solve?metrics=1" -H "Content-Type: application/json" \
+   -d '{"word1":"SEND","word2":"MORE","result":"MONEY"}'
+```
+
+- Docker (simple) — run the app in a container:
+
+```bash
+docker build -t crypto-solver .
+docker run -p 8000:8000 crypto-solver
+```
+
+For production, use a process manager (systemd) or an ASGI server behind a reverse proxy (NGINX) and add request timeouts and resource limits. The FastAPI endpoint supports `?metrics=1` to include solver metrics in the JSON response.
 
 ## Contribution
 
