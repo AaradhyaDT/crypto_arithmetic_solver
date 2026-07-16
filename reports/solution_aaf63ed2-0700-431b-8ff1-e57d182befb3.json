@@ -1,0 +1,156 @@
+{
+  "solutions": {
+    "O": 4,
+    "R": 8,
+    "W": 3,
+    "U": 6,
+    "T": 7,
+    "F": 1
+  },
+  "metrics": {
+    "elapsed_seconds": 0.0,
+    "recursive_calls": 304,
+    "assignments": 148,
+    "backtracks": 142,
+    "solutions_found": 1,
+    "fastest_solution_index": 0,
+    "solution_steps": [
+      {
+        "column": 1,
+        "equation": "O(4) + O(4) = R(8)"
+      },
+      {
+        "column": 2,
+        "equation": "W(3) + W(3) = U(6)"
+      },
+      {
+        "column": 3,
+        "equation": "T(7) + T(7) = O(4), carry 1"
+      },
+      {
+        "column": 4,
+        "equation": "carry 1 = F(1)"
+      }
+    ],
+    "reasoning_steps": [
+      {
+        "column": 1,
+        "role": "addend",
+        "char": "O",
+        "chosen": 4,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 3,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 1,
+        "role": "result",
+        "char": "R",
+        "chosen": 8,
+        "reason": "forced",
+        "depends_on": [
+          "O=4",
+          "O=4"
+        ],
+        "note": "O=4 and O=4 -> column sum 8, R = 8 % 10 = 8 (carry_in=0)"
+      },
+      {
+        "column": 2,
+        "role": "addend",
+        "char": "W",
+        "chosen": 3,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 2,
+        "role": "result",
+        "char": "U",
+        "chosen": 6,
+        "reason": "forced",
+        "depends_on": [
+          "W=3",
+          "W=3"
+        ],
+        "note": "W=3 and W=3 -> column sum 6, U = 6 % 10 = 6 (carry_in=0)"
+      },
+      {
+        "column": 3,
+        "role": "addend",
+        "char": "T",
+        "chosen": 7,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "leading digit cannot be 0"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 3,
+            "reason": "already taken by W"
+          },
+          {
+            "digit": 4,
+            "reason": "already taken by O"
+          },
+          {
+            "digit": 5,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 6,
+            "reason": "already taken by U"
+          }
+        ]
+      },
+      {
+        "column": 4,
+        "role": "result",
+        "char": "F",
+        "chosen": 1,
+        "reason": "forced",
+        "depends_on": [
+          "carry 1 (from column 3)"
+        ],
+        "note": "carry 1 (from column 3) -> column sum 1, F = 1 % 10 = 1 (carry_in=1)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1739 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "cli.py",
+      "file_type": "code",
+      "source_file": "cli.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cli",
+      "community": 3,
+      "norm_label": "cli.py"
+    },
+    {
+      "label": "cmd_solve()",
+      "file_type": "code",
+      "source_file": "cli.py",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "cli_cmd_solve",
+      "community": 3,
+      "norm_label": "cmd_solve()"
+    },
+    {
+      "label": "cmd_export()",
+      "file_type": "code",
+      "source_file": "cli.py",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "cli_cmd_export",
+      "community": 3,
+      "norm_label": "cmd_export()"
+    },
+    {
+      "label": "cmd_report()",
+      "file_type": "code",
+      "source_file": "cli.py",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "cli_cmd_report",
+      "community": 3,
+      "norm_label": "cmd_report()"
+    },
+    {
+      "label": "cmd_test()",
+      "file_type": "code",
+      "source_file": "cli.py",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "cli_cmd_test",
+      "community": 3,
+      "norm_label": "cmd_test()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "cli.py",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "cli_main",
+      "community": 3,
+      "norm_label": "main()"
+    },
+    {
+      "label": "solve_with_metrics.ps1",
+      "file_type": "code",
+      "source_file": "solve_with_metrics.ps1",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "solve_with_metrics",
+      "community": 0,
+      "norm_label": "solve_with_metrics.ps1"
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "src/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_init",
+      "community": 7,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "Package marker for src.",
+      "file_type": "rationale",
+      "source_file": "src/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_init_rationale_1",
+      "community": 7,
+      "norm_label": "package marker for src."
+    },
+    {
+      "label": "crypto_arithmetic_solver.py",
+      "file_type": "code",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_crypto_arithmetic_solver",
+      "community": 0,
+      "norm_label": "crypto_arithmetic_solver.py"
+    },
+    {
+      "label": "_derive_solution_steps()",
+      "file_type": "code",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_crypto_arithmetic_solver_derive_solution_steps",
+      "community": 0,
+      "norm_label": "_derive_solution_steps()"
+    },
+    {
+      "label": "solve_cryptarithmetic_optimized()",
+      "file_type": "code",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized",
+      "community": 1,
+      "norm_label": "solve_cryptarithmetic_optimized()"
+    },
+    {
+      "label": "_derive_leading_bound()",
+      "file_type": "code",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "src_crypto_arithmetic_solver_derive_leading_bound",
+      "community": 0,
+      "norm_label": "_derive_leading_bound()"
+    },
+    {
+      "label": "Replay the accepted assignment column-by-column (right-to-left) to build a",
+      "file_type": "rationale",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_crypto_arithmetic_solver_rationale_12",
+      "community": 0,
+      "norm_label": "replay the accepted assignment column-by-column (right-to-left) to build a"
+    },
+    {
+      "label": "Compute the algebraic upper bound on the leading-column addend digit(s),     de",
+      "file_type": "rationale",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L118",
+      "_origin": "ast",
+      "id": "src_crypto_arithmetic_solver_rationale_118",
+      "community": 0,
+      "norm_label": "compute the algebraic upper bound on the leading-column addend digit(s),     de"
+    },
+    {
+      "label": "Column-wise cryptarithmetic solver with production safety features.      Args:",
+      "file_type": "rationale",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L179",
+      "_origin": "ast",
+      "id": "src_crypto_arithmetic_solver_rationale_179",
+      "community": 1,
+      "norm_label": "column-wise cryptarithmetic solver with production safety features.      args:"
+    },
+    {
+      "label": "fastapi_app.py",
+      "file_type": "code",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_fastapi_app",
+      "community": 2,
+      "norm_label": "fastapi_app.py"
+    },
+    {
+      "label": "Puzzle",
+      "file_type": "code",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_fastapi_app_puzzle",
+      "community": 2,
+      "norm_label": "puzzle"
+    },
+    {
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "basemodel",
+      "community": 2,
+      "norm_label": "basemodel"
+    },
+    {
+      "label": "solve()",
+      "file_type": "code",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "src_fastapi_app_solve",
+      "community": 2,
+      "norm_label": "solve()"
+    },
+    {
+      "label": "Solve puzzle. If `metrics=true` is provided as a query parameter, return metrics",
+      "file_type": "rationale",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "src_fastapi_app_rationale_19",
+      "community": 2,
+      "norm_label": "solve puzzle. if `metrics=true` is provided as a query parameter, return metrics"
+    },
+    {
+      "label": "run_unit_tests.py",
+      "file_type": "code",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_run_unit_tests",
+      "community": 1,
+      "norm_label": "run_unit_tests.py"
+    },
+    {
+      "label": "numeric_value()",
+      "file_type": "code",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "tests_run_unit_tests_numeric_value",
+      "community": 1,
+      "norm_label": "numeric_value()"
+    },
+    {
+      "label": "test_send_more_money()",
+      "file_type": "code",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "tests_run_unit_tests_test_send_more_money",
+      "community": 1,
+      "norm_label": "test_send_more_money()"
+    },
+    {
+      "label": "test_return_all()",
+      "file_type": "code",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "tests_run_unit_tests_test_return_all",
+      "community": 1,
+      "norm_label": "test_return_all()"
+    },
+    {
+      "label": "test_invalid_length()",
+      "file_type": "code",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "tests_run_unit_tests_test_invalid_length",
+      "community": 1,
+      "norm_label": "test_invalid_length()"
+    },
+    {
+      "label": "test_crypto_solver.py",
+      "file_type": "code",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_test_crypto_solver",
+      "community": 1,
+      "norm_label": "test_crypto_solver.py"
+    },
+    {
+      "label": "numeric_value()",
+      "file_type": "code",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "tests_test_crypto_solver_numeric_value",
+      "community": 1,
+      "norm_label": "numeric_value()"
+    },
+    {
+      "label": "test_send_more_money()",
+      "file_type": "code",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "tests_test_crypto_solver_test_send_more_money",
+      "community": 1,
+      "norm_label": "test_send_more_money()"
+    },
+    {
+      "label": "test_return_all()",
+      "file_type": "code",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "tests_test_crypto_solver_test_return_all",
+      "community": 1,
+      "norm_label": "test_return_all()"
+    },
+    {
+      "label": "test_invalid_length()",
+      "file_type": "code",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "tests_test_crypto_solver_test_invalid_length",
+      "community": 1,
+      "norm_label": "test_invalid_length()"
+    },
+    {
+      "label": "activate_venv.ps1",
+      "file_type": "code",
+      "source_file": "tools/activate_venv.ps1",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_activate_venv",
+      "community": 8,
+      "norm_label": "activate_venv.ps1"
+    },
+    {
+      "label": "check_and_export.py",
+      "file_type": "code",
+      "source_file": "tools/check_and_export.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_check_and_export",
+      "community": 0,
+      "norm_label": "check_and_export.py"
+    },
+    {
+      "label": "Convenience script: run puzzle checks, write JSON and readable report.",
+      "file_type": "rationale",
+      "source_file": "tools/check_and_export.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_check_and_export_rationale_1",
+      "community": 0,
+      "norm_label": "convenience script: run puzzle checks, write json and readable report."
+    },
+    {
+      "label": "check_puzzles.py",
+      "file_type": "code",
+      "source_file": "tools/check_puzzles.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_check_puzzles",
+      "community": 5,
+      "norm_label": "check_puzzles.py"
+    },
+    {
+      "label": "check_solution()",
+      "file_type": "code",
+      "source_file": "tools/check_puzzles.py",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "tools_check_puzzles_check_solution",
+      "community": 5,
+      "norm_label": "check_solution()"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "tools/check_puzzles.py",
+      "source_location": "L41",
+      "_origin": "ast",
+      "id": "tools_check_puzzles_run",
+      "community": 5,
+      "norm_label": "run()"
+    },
+    {
+      "label": "generate_readable_report.py",
+      "file_type": "code",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_generate_readable_report",
+      "community": 4,
+      "norm_label": "generate_readable_report.py"
+    },
+    {
+      "label": "fmt_mapping()",
+      "file_type": "code",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "tools_generate_readable_report_fmt_mapping",
+      "community": 4,
+      "norm_label": "fmt_mapping()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "tools_generate_readable_report_main",
+      "community": 4,
+      "norm_label": "main()"
+    },
+    {
+      "label": "Path",
+      "file_type": "code",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "path",
+      "community": 4,
+      "norm_label": "path"
+    },
+    {
+      "label": "print_solution.py",
+      "file_type": "code",
+      "source_file": "tools/print_solution.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_print_solution",
+      "community": 6,
+      "norm_label": "print_solution.py"
+    },
+    {
+      "label": "numeric_value()",
+      "file_type": "code",
+      "source_file": "tools/print_solution.py",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "tools_print_solution_numeric_value",
+      "community": 6,
+      "norm_label": "numeric_value()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "tools/print_solution.py",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "tools_print_solution_main",
+      "community": 6,
+      "norm_label": "main()"
+    },
+    {
+      "label": "puzzles_metrics_json.py",
+      "file_type": "code",
+      "source_file": "tools/puzzles_metrics_json.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_puzzles_metrics_json",
+      "community": 9,
+      "norm_label": "puzzles_metrics_json.py"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme",
+      "community": 0,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Project layout",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme_project_layout",
+      "community": 10,
+      "norm_label": "project layout"
+    },
+    {
+      "label": "Crypto Arithmetic solver.py",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "readme_crypto_arithmetic_solver_py",
+      "community": 10,
+      "norm_label": "crypto arithmetic solver.py"
+    },
+    {
+      "label": "Overview",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "readme_overview",
+      "community": 10,
+      "norm_label": "overview"
+    },
+    {
+      "label": "Purpose",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "readme_purpose",
+      "community": 10,
+      "norm_label": "purpose"
+    },
+    {
+      "label": "Algorithm (high level)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "readme_algorithm_high_level",
+      "community": 10,
+      "norm_label": "algorithm (high level)"
+    },
+    {
+      "label": "Key files and locations",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L94",
+      "_origin": "ast",
+      "id": "readme_key_files_and_locations",
+      "community": 10,
+      "norm_label": "key files and locations"
+    },
+    {
+      "label": "Public API",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L104",
+      "_origin": "ast",
+      "id": "readme_public_api",
+      "community": 10,
+      "norm_label": "public api"
+    },
+    {
+      "label": "Usage",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L110",
+      "_origin": "ast",
+      "id": "readme_usage",
+      "community": 10,
+      "norm_label": "usage"
+    },
+    {
+      "label": "Complexity",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "readme_complexity",
+      "community": 10,
+      "norm_label": "complexity"
+    },
+    {
+      "label": "Thread-Safety & Production Notes",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L130",
+      "_origin": "ast",
+      "id": "readme_thread_safety_production_notes",
+      "community": 10,
+      "norm_label": "thread-safety & production notes"
+    },
+    {
+      "label": "Known Fixes & Current Behavior",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "readme_known_fixes_current_behavior",
+      "community": 10,
+      "norm_label": "known fixes & current behavior"
+    },
+    {
+      "label": "Examples (from the test harness)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L139",
+      "_origin": "ast",
+      "id": "readme_examples_from_the_test_harness",
+      "community": 10,
+      "norm_label": "examples (from the test harness)"
+    },
+    {
+      "label": "Limitations & Future Enhancements",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L152",
+      "_origin": "ast",
+      "id": "readme_limitations_future_enhancements",
+      "community": 10,
+      "norm_label": "limitations & future enhancements"
+    },
+    {
+      "label": "Deployment & FastAPI",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "readme_deployment_fastapi",
+      "community": 10,
+      "norm_label": "deployment & fastapi"
+    },
+    {
+      "label": "Contribution",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L186",
+      "_origin": "ast",
+      "id": "readme_contribution",
+      "community": 10,
+      "norm_label": "contribution"
+    },
+    {
+      "label": "File",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L196",
+      "_origin": "ast",
+      "id": "readme_file",
+      "community": 10,
+      "norm_label": "file"
+    },
+    {
+      "label": "Crypto_Arithmetic_solver.md",
+      "file_type": "document",
+      "source_file": "docs/Crypto_Arithmetic_solver.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_crypto_arithmetic_solver",
+      "community": 12,
+      "norm_label": "crypto_arithmetic_solver.md"
+    },
+    {
+      "label": "Crypto Arithmetic Solver",
+      "file_type": "document",
+      "source_file": "docs/Crypto_Arithmetic_solver.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_crypto_arithmetic_solver_crypto_arithmetic_solver",
+      "community": 12,
+      "norm_label": "crypto arithmetic solver"
+    },
+    {
+      "label": "puzzles_metrics_report.md",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report",
+      "community": 11,
+      "norm_label": "puzzles_metrics_report.md"
+    },
+    {
+      "label": "Puzzles Metrics Report",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "community": 11,
+      "norm_label": "puzzles metrics report"
+    },
+    {
+      "label": "WRONG+WRONG=RIGHT",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_wrong_wrong_right",
+      "community": 11,
+      "norm_label": "wrong+wrong=right"
+    },
+    {
+      "label": "BASE+BALL=GAMES",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_base_ball_games",
+      "community": 11,
+      "norm_label": "base+ball=games"
+    },
+    {
+      "label": "TWO+TWO=FOUR",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_two_two_four",
+      "community": 11,
+      "norm_label": "two+two=four"
+    },
+    {
+      "label": "SWIM+WEAR=RELAX",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_swim_wear_relax",
+      "community": 11,
+      "norm_label": "swim+wear=relax"
+    },
+    {
+      "label": "LOGIC+LOGIC=PROLOG",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_logic_logic_prolog",
+      "community": 11,
+      "norm_label": "logic+logic=prolog"
+    },
+    {
+      "label": "LETS+WAVE=LATER",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L81",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_lets_wave_later",
+      "community": 11,
+      "norm_label": "lets+wave=later"
+    },
+    {
+      "label": "CROSS+ROADS=DANGER",
+      "file_type": "document",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "reports_puzzles_metrics_report_cross_roads_danger",
+      "community": 11,
+      "norm_label": "cross+roads=danger"
+    },
+    {
+      "label": "requirements.txt",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "requirements.txt",
+      "id": "requirements_txt"
+    },
+    {
+      "label": "Crypto Arithmetic Solver Documentation",
+      "file_type": "document",
+      "source_file": "docs/Crypto_Arithmetic_solver.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "crypto arithmetic solver documentation",
+      "id": "docs_crypto_arithmetic_solver_md"
+    },
+    {
+      "label": "solve_cryptarithmetic_optimized",
+      "file_type": "code",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "solve_cryptarithmetic_optimized",
+      "id": "solve_cryptarithmetic_optimized"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli",
+      "target": "cli_cmd_export"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli",
+      "target": "cli_cmd_report"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli",
+      "target": "cli_cmd_solve"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli",
+      "target": "cli_cmd_test"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli",
+      "target": "cli_main"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli_cmd_solve",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli_main",
+      "target": "cli_cmd_solve"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli_main",
+      "target": "cli_cmd_export"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli_main",
+      "target": "cli_cmd_report"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cli_main",
+      "target": "cli_cmd_test"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme",
+      "target": "solve_with_metrics"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_init_rationale_1",
+      "target": "src_init"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/Crypto_Arithmetic_solver.md",
+      "source": "docs_crypto_arithmetic_solver_md",
+      "target": "src_crypto_arithmetic_solver"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme",
+      "target": "src_crypto_arithmetic_solver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver",
+      "target": "src_crypto_arithmetic_solver_derive_leading_bound"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver",
+      "target": "src_crypto_arithmetic_solver_derive_solution_steps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L164",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 0.9,
+      "source": "src_fastapi_app",
+      "target": "src_crypto_arithmetic_solver"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests",
+      "target": "src_crypto_arithmetic_solver"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver",
+      "target": "src_crypto_arithmetic_solver"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver_rationale_12",
+      "target": "src_crypto_arithmetic_solver_derive_solution_steps"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L378",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized",
+      "target": "src_crypto_arithmetic_solver_derive_solution_steps"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L179",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver_rationale_179",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L365",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized",
+      "target": "src_crypto_arithmetic_solver_derive_leading_bound"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L350",
+      "weight": 1.0,
+      "source": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized",
+      "target": "src_fastapi_app_solve"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_fastapi_app",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests_test_invalid_length",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests_test_return_all",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests_test_send_more_money",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver_test_invalid_length",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver_test_return_all",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver_test_send_more_money",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tools/check_puzzles.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "tools_check_puzzles_run",
+      "target": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/crypto_arithmetic_solver.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_crypto_arithmetic_solver_rationale_118",
+      "target": "src_crypto_arithmetic_solver_derive_leading_bound"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme",
+      "target": "src_fastapi_app"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "README.md",
+      "source": "src_fastapi_app",
+      "target": "solve_cryptarithmetic_optimized"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_fastapi_app",
+      "target": "src_fastapi_app_puzzle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_fastapi_app",
+      "target": "src_fastapi_app_solve"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_fastapi_app_puzzle",
+      "target": "basemodel"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_fastapi_app_solve",
+      "target": "src_fastapi_app_puzzle"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/fastapi_app.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_fastapi_app_rationale_19",
+      "target": "src_fastapi_app_solve"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme",
+      "target": "tests_run_unit_tests"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests",
+      "target": "tests_run_unit_tests_numeric_value"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests",
+      "target": "tests_run_unit_tests_test_invalid_length"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests",
+      "target": "tests_run_unit_tests_test_return_all"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests",
+      "target": "tests_run_unit_tests_test_send_more_money"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run_unit_tests.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_run_unit_tests_test_send_more_money",
+      "target": "tests_run_unit_tests_numeric_value"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver",
+      "target": "tests_test_crypto_solver_numeric_value"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver",
+      "target": "tests_test_crypto_solver_test_invalid_length"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver",
+      "target": "tests_test_crypto_solver_test_return_all"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver",
+      "target": "tests_test_crypto_solver_test_send_more_money"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_crypto_solver.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_crypto_solver_test_send_more_money",
+      "target": "tests_test_crypto_solver_numeric_value"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/Crypto_Arithmetic_solver.md",
+      "source": "docs_crypto_arithmetic_solver_md",
+      "target": "tools_check_and_export"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme",
+      "target": "tools_check_and_export"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "README.md",
+      "source": "tools_check_and_export",
+      "target": "reports_puzzles_metrics_report_puzzles_metrics_report"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/check_and_export.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_check_and_export_rationale_1",
+      "target": "tools_check_and_export"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/check_puzzles.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_check_puzzles",
+      "target": "tools_check_puzzles_check_solution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/check_puzzles.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_check_puzzles",
+      "target": "tools_check_puzzles_run"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/check_puzzles.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_check_puzzles_run",
+      "target": "tools_check_puzzles_check_solution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_generate_readable_report",
+      "target": "tools_generate_readable_report_fmt_mapping"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_generate_readable_report",
+      "target": "tools_generate_readable_report_main"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_generate_readable_report_main",
+      "target": "tools_generate_readable_report_fmt_mapping"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/generate_readable_report.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_generate_readable_report_main",
+      "target": "path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/print_solution.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_print_solution",
+      "target": "tools_print_solution_main"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/print_solution.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_print_solution",
+      "target": "tools_print_solution_numeric_value"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/print_solution.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_print_solution_main",
+      "target": "tools_print_solution_numeric_value"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "readme",
+      "target": "readme_project_layout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source": "readme",
+      "target": "requirements_txt"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_algorithm_high_level",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_complexity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L186",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_contribution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_crypto_arithmetic_solver_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_deployment_fastapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_examples_from_the_test_harness",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L196",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_key_files_and_locations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_known_fixes_current_behavior",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L152",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_limitations_future_enhancements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_overview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_public_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_purpose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_thread_safety_production_notes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L110",
+      "weight": 1.0,
+      "source": "readme_project_layout",
+      "target": "readme_usage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/Crypto_Arithmetic_solver.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_crypto_arithmetic_solver",
+      "target": "docs_crypto_arithmetic_solver_crypto_arithmetic_solver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_base_ball_games",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_cross_roads_danger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_lets_wave_later",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_logic_logic_prolog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_swim_wear_relax",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_two_two_four",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reports/puzzles_metrics_report.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "reports_puzzles_metrics_report_puzzles_metrics_report",
+      "target": "reports_puzzles_metrics_report_wrong_wrong_right",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "71b2cb74b656c1c6adc7e5e7c0a258d3d9053e27"
+}

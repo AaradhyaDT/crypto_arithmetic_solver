@@ -1,0 +1,112 @@
+{
+  "cli.py": {
+    "mtime": 1784141294.0,
+    "ast_hash": "6e0c60e34e648829fd33bc882f755147",
+    "semantic_hash": "6e0c60e34e648829fd33bc882f755147"
+  },
+  "pyrightconfig.json": {
+    "mtime": 1784141792.0,
+    "ast_hash": "d1ed3a6ce8d359d5150f204da740c776",
+    "semantic_hash": "d1ed3a6ce8d359d5150f204da740c776"
+  },
+  "reports/puzzles_metrics.json": {
+    "mtime": 1784140626.0,
+    "ast_hash": "29ca0a1a250a49cb2f5366b742821c1c",
+    "semantic_hash": "29ca0a1a250a49cb2f5366b742821c1c"
+  },
+  "reports/send_more_metrics.json": {
+    "mtime": 1784140728.0,
+    "ast_hash": "4b3e570a20bf9b4b2217bf56ab4b5f10",
+    "semantic_hash": "4b3e570a20bf9b4b2217bf56ab4b5f10"
+  },
+  "send_more_metrics.json": {
+    "mtime": 1784140290.0,
+    "ast_hash": "4b3e570a20bf9b4b2217bf56ab4b5f10",
+    "semantic_hash": "4b3e570a20bf9b4b2217bf56ab4b5f10"
+  },
+  "solve_with_metrics.ps1": {
+    "mtime": 1784146738.4687567,
+    "ast_hash": "0f0c30056d1ad8329e28f329693518fc",
+    "semantic_hash": "0f0c30056d1ad8329e28f329693518fc"
+  },
+  "src/__init__.py": {
+    "mtime": 1784141844.0,
+    "ast_hash": "ba21a9d4e887941a5cfc60c9d7cabdec",
+    "semantic_hash": "ba21a9d4e887941a5cfc60c9d7cabdec"
+  },
+  "src/crypto_arithmetic_solver.py": {
+    "mtime": 1784146395.1558578,
+    "ast_hash": "5e4742084bb33905a5097007f5b2a992",
+    "semantic_hash": "5e4742084bb33905a5097007f5b2a992"
+  },
+  "src/fastapi_app.py": {
+    "mtime": 1784142606.2496116,
+    "ast_hash": "1a32f8428fbb5c884825a7ee84e88cc8",
+    "semantic_hash": "1a32f8428fbb5c884825a7ee84e88cc8"
+  },
+  "tests/run_unit_tests.py": {
+    "mtime": 1784141844.0,
+    "ast_hash": "22aa93bde21e5c13c91d5978ee125651",
+    "semantic_hash": "22aa93bde21e5c13c91d5978ee125651"
+  },
+  "tests/test_crypto_solver.py": {
+    "mtime": 1784142559.1007373,
+    "ast_hash": "80e4fa6ef228cc6706cb8b2d6fddec1e",
+    "semantic_hash": "80e4fa6ef228cc6706cb8b2d6fddec1e"
+  },
+  "tools/activate_venv.ps1": {
+    "mtime": 1784143180.0360653,
+    "ast_hash": "9f7b68f7721298d46b25dd246bbfc1c0",
+    "semantic_hash": "9f7b68f7721298d46b25dd246bbfc1c0"
+  },
+  "tools/check_and_export.py": {
+    "mtime": 1784140562.0,
+    "ast_hash": "f7867e16ebfd15b0ae9a3bf42e3168f1",
+    "semantic_hash": "f7867e16ebfd15b0ae9a3bf42e3168f1"
+  },
+  "tools/check_puzzles.py": {
+    "mtime": 1784140562.0,
+    "ast_hash": "14c00fccffc1157fa69c61329b6a18aa",
+    "semantic_hash": "14c00fccffc1157fa69c61329b6a18aa"
+  },
+  "tools/generate_readable_report.py": {
+    "mtime": 1784140562.0,
+    "ast_hash": "b8253266c658b8fb8254c23ace42ff9c",
+    "semantic_hash": "b8253266c658b8fb8254c23ace42ff9c"
+  },
+  "tools/print_solution.py": {
+    "mtime": 1784146500.800995,
+    "ast_hash": "a270223b020107995e491d3fad58110d",
+    "semantic_hash": "a270223b020107995e491d3fad58110d"
+  },
+  "tools/puzzles_metrics_json.py": {
+    "mtime": 1784140562.0,
+    "ast_hash": "dc931fc4f9aad2f0a5ccc2fe3239f8e7",
+    "semantic_hash": "dc931fc4f9aad2f0a5ccc2fe3239f8e7"
+  },
+  "reports/solution_aaf63ed2-0700-431b-8ff1-e57d182befb3.json": {
+    "mtime": 1784181936.0955136,
+    "ast_hash": "5b2dad1637cccbadaed93bab8321b4ba",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1784143598.724271,
+    "ast_hash": "44c4ddcb37bdfa838963a2fecb1c257d",
+    "semantic_hash": ""
+  },
+  "docs/Crypto_Arithmetic_solver.md": {
+    "mtime": 1784140562.0,
+    "ast_hash": "0505425e909f3ea398871b59cd9309ba",
+    "semantic_hash": ""
+  },
+  "reports/puzzles_metrics_report.md": {
+    "mtime": 1784140626.0,
+    "ast_hash": "07bae87ef36082e7c80b76ecb10da867",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1784142739.208677,
+    "ast_hash": "f175f55fb6c886619a388bd05fef0582",
+    "semantic_hash": ""
+  }
+}

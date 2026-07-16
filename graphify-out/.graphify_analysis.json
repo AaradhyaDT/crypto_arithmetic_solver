@@ -1,0 +1,199 @@
+{
+  "communities": {
+    "0": [
+      "docs_crypto_arithmetic_solver_md",
+      "readme_md",
+      "reports_puzzles_metrics_report_md",
+      "requirements_txt",
+      "solve_with_metrics",
+      "src_crypto_arithmetic_solver",
+      "src_crypto_arithmetic_solver_derive_leading_bound",
+      "src_crypto_arithmetic_solver_derive_solution_steps",
+      "src_crypto_arithmetic_solver_rationale_118",
+      "src_crypto_arithmetic_solver_rationale_12",
+      "tools_check_and_export",
+      "tools_check_and_export_rationale_1"
+    ],
+    "1": [
+      "src_crypto_arithmetic_solver_rationale_179",
+      "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized",
+      "tests_run_unit_tests",
+      "tests_run_unit_tests_numeric_value",
+      "tests_run_unit_tests_test_invalid_length",
+      "tests_run_unit_tests_test_return_all",
+      "tests_run_unit_tests_test_send_more_money",
+      "tests_test_crypto_solver",
+      "tests_test_crypto_solver_numeric_value",
+      "tests_test_crypto_solver_test_invalid_length",
+      "tests_test_crypto_solver_test_return_all",
+      "tests_test_crypto_solver_test_send_more_money"
+    ],
+    "2": [
+      "basemodel",
+      "solve_cryptarithmetic_optimized",
+      "src_fastapi_app",
+      "src_fastapi_app_puzzle",
+      "src_fastapi_app_rationale_19",
+      "src_fastapi_app_solve"
+    ],
+    "3": [
+      "cli",
+      "cli_cmd_export",
+      "cli_cmd_report",
+      "cli_cmd_solve",
+      "cli_cmd_test",
+      "cli_main"
+    ],
+    "4": [
+      "path",
+      "tools_generate_readable_report",
+      "tools_generate_readable_report_fmt_mapping",
+      "tools_generate_readable_report_main"
+    ],
+    "5": [
+      "tools_check_puzzles",
+      "tools_check_puzzles_check_solution",
+      "tools_check_puzzles_run"
+    ],
+    "6": [
+      "tools_print_solution",
+      "tools_print_solution_main",
+      "tools_print_solution_numeric_value"
+    ],
+    "7": [
+      "src_init",
+      "src_init_rationale_1"
+    ],
+    "8": [
+      "tools_activate_venv"
+    ],
+    "9": [
+      "tools_puzzles_metrics_json"
+    ]
+  },
+  "cohesion": {
+    "0": 0.18181818181818182,
+    "1": 0.2878787878787879,
+    "2": 0.4,
+    "3": 0.6,
+    "4": 0.6666666666666666,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_crypto_arithmetic_solver_solve_cryptarithmetic_optimized",
+      "label": "solve_cryptarithmetic_optimized()",
+      "degree": 17
+    },
+    {
+      "id": "cli_main",
+      "label": "main()",
+      "degree": 5
+    },
+    {
+      "id": "src_fastapi_app_solve",
+      "label": "solve()",
+      "degree": 4
+    },
+    {
+      "id": "cli_cmd_solve",
+      "label": "cmd_solve()",
+      "degree": 3
+    },
+    {
+      "id": "src_crypto_arithmetic_solver_derive_solution_steps",
+      "label": "_derive_solution_steps()",
+      "degree": 3
+    },
+    {
+      "id": "src_crypto_arithmetic_solver_derive_leading_bound",
+      "label": "_derive_leading_bound()",
+      "degree": 3
+    },
+    {
+      "id": "src_fastapi_app_puzzle",
+      "label": "Puzzle",
+      "degree": 3
+    },
+    {
+      "id": "tests_run_unit_tests_test_send_more_money",
+      "label": "test_send_more_money()",
+      "degree": 3
+    },
+    {
+      "id": "tests_test_crypto_solver_test_send_more_money",
+      "label": "test_send_more_money()",
+      "degree": 3
+    },
+    {
+      "id": "tools_check_puzzles_run",
+      "label": "run()",
+      "degree": 3
+    }
+  ],
+  "surprises": [
+    {
+      "source": "run()",
+      "target": "solve_cryptarithmetic_optimized()",
+      "source_files": [
+        "tools/check_puzzles.py",
+        "src/crypto_arithmetic_solver.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "cmd_solve()",
+      "target": "solve_cryptarithmetic_optimized()",
+      "source_files": [
+        "cli.py",
+        "src/crypto_arithmetic_solver.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "test_invalid_length()",
+      "target": "solve_cryptarithmetic_optimized()",
+      "source_files": [
+        "tests/run_unit_tests.py",
+        "src/crypto_arithmetic_solver.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `test_invalid_length()` unexpectedly reaches hub `solve_cryptarithmetic_optimized()`"
+    },
+    {
+      "source": "test_return_all()",
+      "target": "solve_cryptarithmetic_optimized()",
+      "source_files": [
+        "tests/run_unit_tests.py",
+        "src/crypto_arithmetic_solver.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `test_return_all()` unexpectedly reaches hub `solve_cryptarithmetic_optimized()`"
+    },
+    {
+      "source": "test_invalid_length()",
+      "target": "solve_cryptarithmetic_optimized()",
+      "source_files": [
+        "tests/test_crypto_solver.py",
+        "src/crypto_arithmetic_solver.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `test_invalid_length()` unexpectedly reaches hub `solve_cryptarithmetic_optimized()`"
+    }
+  ],
+  "tokens": {
+    "input": 4646,
+    "output": 1413
+  }
+}
