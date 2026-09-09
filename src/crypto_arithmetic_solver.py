@@ -1,4 +1,4 @@
-from typing import Dict, Optional, List, Union, Tuple, overload
+from typing import Dict, Optional, List, Union, Tuple, overload, Any
 try:
     from typing import Literal
 except Exception:
@@ -388,10 +388,150 @@ def solve_cryptarithmetic_optimized(
     return solutions[0] if solutions else None
 
 
+def check_solution(
+    word1: str,
+    word2: str,
+    result: str,
+    mapping: Optional[Dict[str, Union[int, str]]],
+) -> Tuple[bool, str]:
+    """
+    Verify whether a candidate letter-to-digit mapping is a valid solution
+    for the cryptarithmetic puzzle word1 + word2 = result.
+
+    Checks:
+      1. Mapping is provided and non-empty.
+      2. Words and result are valid non-empty alphabetic strings.
+      3. All unique characters in word1, word2, and result are present in the mapping.
+      4. All mapped values are integers between 0 and 9.
+      5. Digits assigned to characters are unique (bijective mapping).
+      6. No multi-letter word has a leading zero.
+      7. The arithmetic sum word1 + word2 == result holds.
+
+    Returns:
+      (True, "OK: <n1> + <n2> = <nr>") if valid, or (False, "<reason>") if invalid.
+    """
+    if mapping is None:
+        return False, "No solution mapping provided"
+
+    w1 = word1.strip().upper()
+    w2 = word2.strip().upper()
+    res = result.strip().upper()
+
+    if not w1 or not w2 or not res:
+        return False, "Words and result must be non-empty strings"
+
+    if not (w1.isalpha() and w2.isalpha() and res.isalpha()):
+        return False, "Words and result must contain only alphabetic characters"
+
+    all_chars = sorted(set(w1 + w2 + res))
+
+    clean_mapping: Dict[str, int] = {}
+    for k, v in mapping.items():
+        k_clean = str(k).strip().upper()
+        try:
+            val_int = int(v)
+        except (ValueError, TypeError):
+            return False, f"Invalid non-integer digit for '{k}': {v!r}"
+        if not (0 <= val_int <= 9):
+            return False, f"Digit for '{k}' out of bounds (0-9): {val_int}"
+        clean_mapping[k_clean] = val_int
+
+    missing = [c for c in all_chars if c not in clean_mapping]
+    if missing:
+        return False, f"Missing mapping for character(s): {', '.join(missing)}"
+
+    digit_to_chars: Dict[int, List[str]] = {}
+    for c in all_chars:
+        d = clean_mapping[c]
+        digit_to_chars.setdefault(d, []).append(c)
+
+    duplicates = {d: chars for d, chars in digit_to_chars.items() if len(chars) > 1}
+    if duplicates:
+        dup_str = ", ".join(f"digit {d} used by {','.join(chars)}" for d, chars in sorted(duplicates.items()))
+        return False, f"Duplicate digits assigned: {dup_str}"
+
+    for w in (w1, w2, res):
+        if len(w) > 1 and clean_mapping[w[0]] == 0:
+            return False, f"Leading zero for '{w[0]}' in '{w}'"
+
+    n1 = int("".join(str(clean_mapping[c]) for c in w1))
+    n2 = int("".join(str(clean_mapping[c]) for c in w2))
+    nr = int("".join(str(clean_mapping[c]) for c in res))
+
+    if n1 + n2 != nr:
+        return False, f"Arithmetic mismatch: {n1} + {n2} = {n1 + n2} != {nr}"
+
+    return True, f"OK: {n1} + {n2} = {nr}"
+
+
+def parse_mapping(mapping_str: str) -> Dict[str, int]:
+    """Parse a mapping string into a dict of {str: int}.
+
+    Supported formats:
+      - JSON string: '{"S": 9, "E": 5, ...}' or "{'S': 9, 'E': 5, ...}"
+      - Delimited pairs: 'S=9, E=5, N=6' or 'S:9, E:5, N:6'
+      - Key-value pairs inside braces: '{S:9, E:5}' or '{S=9, E=5}'
+    """
+    mapping_str = mapping_str.strip()
+    if mapping_str.startswith("{") and mapping_str.endswith("}"):
+        import json
+        try:
+            raw = json.loads(mapping_str)
+            return {str(k).strip().upper(): int(v) for k, v in raw.items()}
+        except Exception:
+            pass
+        try:
+            raw = json.loads(mapping_str.replace("'", '"'))
+            return {str(k).strip().upper(): int(v) for k, v in raw.items()}
+        except Exception:
+            pass
+        mapping_str = mapping_str[1:-1].strip()
+
+    res: Dict[str, int] = {}
+    items = [part.strip() for part in mapping_str.replace(";", ",").split(",") if part.strip()]
+    for item in items:
+        cleaned_item = item.strip("\"' ")
+        if "=" in cleaned_item:
+            k, v = cleaned_item.split("=", 1)
+        elif ":" in cleaned_item:
+            k, v = cleaned_item.split(":", 1)
+        else:
+            raise ValueError(f"Cannot parse mapping item '{item}'. Use 'KEY=VAL' or 'KEY:VAL'.")
+        k_clean = k.strip("\"' \t\r\n").upper()
+        v_clean = v.strip("\"' \t\r\n")
+        res[k_clean] = int(v_clean)
+    return res
+
+
+def load_mapping_from_json(path_or_str: Union[str, Any]) -> Dict[str, int]:
+    """Extract a solution mapping from a JSON file path.
+
+    Supports:
+      - Direct dict: {"S": 9, ...}
+      - Solver metrics output: {"solutions": [{"S": 9, ...}], "metrics": ...}
+      - Solver metrics with single solution dict: {"solutions": {"S": 9, ...}}
+    """
+    import json
+    from pathlib import Path
+    data = json.loads(Path(path_or_str).read_text(encoding="utf-8"))
+    if isinstance(data, dict):
+        if "solutions" in data:
+            sols = data["solutions"]
+            if isinstance(sols, list) and sols:
+                return {str(k).strip().upper(): int(v) for k, v in sols[0].items()}
+            elif isinstance(sols, dict):
+                return {str(k).strip().upper(): int(v) for k, v in sols.items()}
+        return {str(k).strip().upper(): int(v) for k, v in data.items() if str(k) not in ("metrics",)}
+    elif isinstance(data, list) and data:
+        return {str(k).strip().upper(): int(v) for k, v in data[0].items()}
+    raise ValueError(f"Unable to extract letter mapping from {path_or_str}")
+
+
 if __name__ == "__main__":
     import argparse
+    import sys
 
-    parser = argparse.ArgumentParser(description="Crypto-arithmetic solver")
+    parser = argparse.ArgumentParser(description="Crypto-arithmetic solver and checker")
     parser.add_argument("word1")
     parser.add_argument("word2")
     parser.add_argument("result")
@@ -399,7 +539,19 @@ if __name__ == "__main__":
     parser.add_argument("--timeout", type=float, default=None, help="Timeout in seconds")
     parser.add_argument("--max-solutions", type=int, default=None)
     parser.add_argument("--metrics-json", type=str, default=None, help="Write solutions+metrics to JSON file")
+    parser.add_argument("--check", action="store_true", help="Check if provided mapping is a valid solution")
+    parser.add_argument("--mapping", type=str, default=None, help="Mapping as JSON or key=val pairs (e.g. S=9,E=5,...)")
+    parser.add_argument("--mapping-json", type=str, default=None, help="Path to JSON file containing mapping")
     args = parser.parse_args()
+
+    if args.check:
+        if not args.mapping and not args.mapping_json:
+            parser.error("--check requires --mapping or --mapping-json")
+        mapping = load_mapping_from_json(args.mapping_json) if args.mapping_json else parse_mapping(args.mapping)
+        valid, msg = check_solution(args.word1, args.word2, args.result, mapping)
+        print(f"Valid: {valid}")
+        print(msg)
+        sys.exit(0 if valid else 1)
 
     if args.metrics_json:
         sols, metrics = solve_cryptarithmetic_optimized(  # type: ignore[misc]

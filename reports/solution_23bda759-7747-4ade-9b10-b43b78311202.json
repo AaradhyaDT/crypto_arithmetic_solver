@@ -1,0 +1,262 @@
+{
+  "solutions": {
+    "D": 7,
+    "E": 5,
+    "Y": 2,
+    "N": 6,
+    "R": 8,
+    "O": 0,
+    "S": 9,
+    "M": 1
+  },
+  "metrics": {
+    "elapsed_seconds": 0.01599999999962165,
+    "recursive_calls": 6117,
+    "assignments": 5247,
+    "backtracks": 5239,
+    "solutions_found": 1,
+    "fastest_solution_index": 0,
+    "solution_steps": [
+      {
+        "column": 1,
+        "equation": "D(7) + E(5) = Y(2), carry 1"
+      },
+      {
+        "column": 2,
+        "equation": "N(6) + R(8) + carry 1 = E(5), carry 1"
+      },
+      {
+        "column": 3,
+        "equation": "E(5) + O(0) + carry 1 = N(6)"
+      },
+      {
+        "column": 4,
+        "equation": "S(9) + M(1) = O(0), carry 1"
+      },
+      {
+        "column": 5,
+        "equation": "carry 1 = M(1)"
+      }
+    ],
+    "reasoning_steps": [
+      {
+        "column": 1,
+        "role": "addend",
+        "char": "D",
+        "chosen": 7,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 3,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 4,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 5,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 6,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 1,
+        "role": "addend2",
+        "char": "E",
+        "chosen": 5,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 3,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 4,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 1,
+        "role": "result",
+        "char": "Y",
+        "chosen": 2,
+        "reason": "forced",
+        "depends_on": [
+          "D=7",
+          "E=5"
+        ],
+        "note": "D=7 and E=5 -> column sum 12, Y = 12 % 10 = 2 (carry_in=0)"
+      },
+      {
+        "column": 2,
+        "role": "addend",
+        "char": "N",
+        "chosen": 6,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "already taken by Y"
+          },
+          {
+            "digit": 3,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 4,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 5,
+            "reason": "already taken by E"
+          }
+        ]
+      },
+      {
+        "column": 2,
+        "role": "addend2",
+        "char": "R",
+        "chosen": 8,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "already taken by Y"
+          },
+          {
+            "digit": 3,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 4,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 5,
+            "reason": "already taken by E"
+          },
+          {
+            "digit": 6,
+            "reason": "already taken by N"
+          },
+          {
+            "digit": 7,
+            "reason": "already taken by D"
+          }
+        ]
+      },
+      {
+        "column": 3,
+        "role": "addend2",
+        "char": "O",
+        "chosen": 0,
+        "reason": "chosen",
+        "eliminated": []
+      },
+      {
+        "column": 4,
+        "role": "addend",
+        "char": "S",
+        "chosen": 9,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "already taken by O"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "already taken by Y"
+          },
+          {
+            "digit": 3,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 4,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 5,
+            "reason": "already taken by E"
+          },
+          {
+            "digit": 6,
+            "reason": "already taken by N"
+          },
+          {
+            "digit": 7,
+            "reason": "already taken by D"
+          },
+          {
+            "digit": 8,
+            "reason": "already taken by R"
+          }
+        ]
+      },
+      {
+        "column": 4,
+        "role": "addend2",
+        "char": "M",
+        "chosen": 1,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "already taken by O"
+          }
+        ]
+      }
+    ]
+  }
+}

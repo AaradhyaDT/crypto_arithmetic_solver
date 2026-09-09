@@ -3,6 +3,7 @@
 
 Commands:
   solve    Solve a single puzzle
+  check    Check if a candidate mapping solves a puzzle
   export   Generate JSON metrics for sample puzzles
   report   Generate Markdown report from JSON
   test     Run lightweight unit tests
@@ -31,6 +32,25 @@ def cmd_solve(args):
     else:
         sols = solve_cryptarithmetic_optimized(args.word1, args.word2, args.result, return_all=args.all, timeout=args.timeout)
         print(sols)
+
+
+def cmd_check(args):
+    from src.crypto_arithmetic_solver import check_solution, parse_mapping, load_mapping_from_json
+
+    if not args.mapping and not args.mapping_json:
+        print("Error: check command requires --mapping or --mapping-json", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        mapping = load_mapping_from_json(args.mapping_json) if args.mapping_json else parse_mapping(args.mapping)
+    except Exception as e:
+        print(f"Error reading/parsing mapping: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    valid, msg = check_solution(args.word1, args.word2, args.result, mapping)
+    print(f"Valid: {valid}")
+    print(msg)
+    sys.exit(0 if valid else 1)
 
 
 def cmd_export(_):
@@ -62,6 +82,13 @@ def main():
     p.add_argument("--timeout", type=float, default=None)
     p.add_argument("--metrics-json", default=None)
 
+    p_check = sub.add_parser("check")
+    p_check.add_argument("word1")
+    p_check.add_argument("word2")
+    p_check.add_argument("result")
+    p_check.add_argument("--mapping", default=None, help="Mapping as JSON or key=val pairs (e.g. S=9,E=5,...)")
+    p_check.add_argument("--mapping-json", default=None, help="Path to JSON file containing mapping")
+
     sub.add_parser("export")
 
     p2 = sub.add_parser("report")
@@ -72,6 +99,8 @@ def main():
     args, rest = parser.parse_known_args()
     if args.cmd == "solve":
         cmd_solve(args)
+    elif args.cmd == "check":
+        cmd_check(args)
     elif args.cmd == "export":
         cmd_export(args)
     elif args.cmd == "report":
@@ -84,3 +113,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

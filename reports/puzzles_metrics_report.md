@@ -3,7 +3,7 @@
 ## WRONG+WRONG=RIGHT
 
 - Solutions found: **21**
-- Elapsed (s): **0.000000**
+- Elapsed (s): **0.003841**
 - Recursive calls: **1639**
 - Assignments: **848**
 - Backtracks: **848**
@@ -21,7 +21,7 @@ Showing first 5 solution(s):
 ## BASE+BALL=GAMES
 
 - Solutions found: **1**
-- Elapsed (s): **0.000000**
+- Elapsed (s): **0.001025**
 - Recursive calls: **522**
 - Assignments: **274**
 - Backtracks: **274**
@@ -33,7 +33,7 @@ Showing first 1 solution(s):
 ## TWO+TWO=FOUR
 
 - Solutions found: **7**
-- Elapsed (s): **0.000000**
+- Elapsed (s): **0.001799**
 - Recursive calls: **867**
 - Assignments: **417**
 - Backtracks: **417**
@@ -51,7 +51,7 @@ Showing first 5 solution(s):
 ## SWIM+WEAR=RELAX
 
 - Solutions found: **16**
-- Elapsed (s): **0.031000**
+- Elapsed (s): **0.129002**
 - Recursive calls: **24574**
 - Assignments: **18369**
 - Backtracks: **18369**
@@ -69,7 +69,7 @@ Showing first 5 solution(s):
 ## LOGIC+LOGIC=PROLOG
 
 - Solutions found: **1**
-- Elapsed (s): **0.000000**
+- Elapsed (s): **0.000706**
 - Recursive calls: **442**
 - Assignments: **179**
 - Backtracks: **179**
@@ -81,7 +81,7 @@ Showing first 1 solution(s):
 ## LETS+WAVE=LATER
 
 - Solutions found: **1**
-- Elapsed (s): **0.000000**
+- Elapsed (s): **0.023244**
 - Recursive calls: **8517**
 - Assignments: **7308**
 - Backtracks: **7308**
@@ -93,7 +93,7 @@ Showing first 1 solution(s):
 ## CROSS+ROADS=DANGER
 
 - Solutions found: **1**
-- Elapsed (s): **0.000000**
+- Elapsed (s): **0.007763**
 - Recursive calls: **3510**
 - Assignments: **2396**
 - Backtracks: **2396**

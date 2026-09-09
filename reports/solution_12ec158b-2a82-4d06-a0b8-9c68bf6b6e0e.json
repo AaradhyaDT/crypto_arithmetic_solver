@@ -1,0 +1,191 @@
+{
+  "solutions": {
+    "E": 3,
+    "L": 5,
+    "S": 8,
+    "A": 4,
+    "M": 9,
+    "B": 7,
+    "G": 1
+  },
+  "metrics": {
+    "elapsed_seconds": 0.00028290000000197324,
+    "recursive_calls": 234,
+    "assignments": 122,
+    "backtracks": 115,
+    "solutions_found": 1,
+    "fastest_solution_index": 0,
+    "solution_steps": [
+      {
+        "column": 1,
+        "equation": "E(3) + L(5) = S(8)"
+      },
+      {
+        "column": 2,
+        "equation": "S(8) + L(5) = E(3), carry 1"
+      },
+      {
+        "column": 3,
+        "equation": "A(4) + A(4) + carry 1 = M(9)"
+      },
+      {
+        "column": 4,
+        "equation": "B(7) + B(7) = A(4), carry 1"
+      },
+      {
+        "column": 5,
+        "equation": "carry 1 = G(1)"
+      }
+    ],
+    "reasoning_steps": [
+      {
+        "column": 1,
+        "role": "addend",
+        "char": "E",
+        "chosen": 3,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 1,
+        "role": "addend2",
+        "char": "L",
+        "chosen": 5,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 3,
+            "reason": "already taken by E"
+          },
+          {
+            "digit": 4,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 1,
+        "role": "result",
+        "char": "S",
+        "chosen": 8,
+        "reason": "forced",
+        "depends_on": [
+          "E=3",
+          "L=5"
+        ],
+        "note": "E=3 and L=5 -> column sum 8, S = 8 % 10 = 8 (carry_in=0)"
+      },
+      {
+        "column": 3,
+        "role": "addend",
+        "char": "A",
+        "chosen": 4,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 3,
+            "reason": "already taken by E"
+          }
+        ]
+      },
+      {
+        "column": 3,
+        "role": "result",
+        "char": "M",
+        "chosen": 9,
+        "reason": "forced",
+        "depends_on": [
+          "A=4",
+          "A=4",
+          "carry 1 (from column 2)"
+        ],
+        "note": "A=4 and A=4 and carry 1 (from column 2) -> column sum 9, M = 9 % 10 = 9 (carry_in=1)"
+      },
+      {
+        "column": 4,
+        "role": "addend",
+        "char": "B",
+        "chosen": 7,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "leading digit cannot be 0"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 3,
+            "reason": "already taken by E"
+          },
+          {
+            "digit": 4,
+            "reason": "already taken by A"
+          },
+          {
+            "digit": 5,
+            "reason": "already taken by L"
+          },
+          {
+            "digit": 6,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 5,
+        "role": "result",
+        "char": "G",
+        "chosen": 1,
+        "reason": "forced",
+        "depends_on": [
+          "carry 1 (from column 4)"
+        ],
+        "note": "carry 1 (from column 4) -> column sum 1, G = 1 % 10 = 1 (carry_in=1)"
+      }
+    ]
+  }
+}

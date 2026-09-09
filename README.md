@@ -13,6 +13,16 @@ Quick commands
 ```python src/crypto_arithmetic_solver.py SEND MORE MONEY --metrics-json reports/send_more_metrics.json --timeout 2
 ```
 
+- Check a candidate solution using the CLI:
+
+```bash
+# Using key=value pairs:
+python cli.py check SEND MORE MONEY --mapping "S=9,E=5,N=6,D=7,M=1,O=0,R=8,Y=2"
+
+# Using a saved JSON file or solver output:
+python cli.py check SEND MORE MONEY --mapping-json reports/send_more_metrics.json
+```
+
 - Generate reports for the suite of puzzles (JSON + Markdown):
 
 ```python tools/check_and_export.py
@@ -103,23 +113,41 @@ If you reorganize files, ensure `src` remains a package (has `__init__.py`) so t
 
 ## Public API
 
-- `solve_cryptarithmetic_optimized(word1: str, word2: str, result: str) -> Optional[Dict[str, int]]`
+- `solve_cryptarithmetic_optimized(word1: str, word2: str, result: str, ...) -> Optional[Dict[str, int]]`
   - Returns a dict mapping letters to digits for the first solution found, or `None` if no solution exists.
+  - Optional parameters: `return_all: bool`, `max_solutions: int`, `timeout: float`, `collect_metrics: bool`.
   - Side-effects: none outside its scope (`assigned` and `used_digits` live inside the function).
+
+- `check_solution(word1: str, word2: str, result: str, mapping: Optional[Dict[str, Union[int, str]]]) -> Tuple[bool, str]`
+  - Validates whether a candidate mapping satisfies the cryptarithmetic puzzle.
+  - Verifies character coverage, digit range (0-9), uniqueness of mapped digits, absence of leading zeros on multi-letter words, and exact mathematical equality (`word1 + word2 == result`).
+  - Returns `(True, "OK: <n1> + <n2> = <nr>")` or `(False, "<reason>")`.
 
 ## Usage
 
 Run the file as a script to execute a small built-in CLI test harness (arguments: `word1 word2 result`). Example:
 
 ```bash
-python "d:\AaradhyaDT\AI\crypto_arithmetic_solver.py" SEND MORE MONEY
+python src/crypto_arithmetic_solver.py SEND MORE MONEY
 ```
 
-Or import the function into other modules:
+To check a solution:
+
+```bash
+python src/crypto_arithmetic_solver.py SEND MORE MONEY --check --mapping "S=9,E=5,N=6,D=7,M=1,O=0,R=8,Y=2"
+```
+
+Or import the functions into other modules:
 
 ```python
-from crypto_arithmetic_solver import solve_cryptarithmetic_optimized
+from src.crypto_arithmetic_solver import solve_cryptarithmetic_optimized, check_solution
+
+# Solve:
 solution = solve_cryptarithmetic_optimized("SEND", "MORE", "MONEY")
+
+# Check:
+valid, message = check_solution("SEND", "MORE", "MONEY", solution)
+print(valid, message)  # True, OK: 9567 + 1085 = 10652
 ```
 
 ## Complexity
@@ -172,6 +200,13 @@ uvicorn src.fastapi_app:app --reload --host 0.0.0.0 --port 8000
 ```bash
 curl -X POST "http://127.0.0.1:8000/solve?metrics=1" -H "Content-Type: application/json" \
    -d '{"word1":"SEND","word2":"MORE","result":"MONEY"}'
+```
+
+- Example cURL request to check a candidate solution:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/check" -H "Content-Type: application/json" \
+   -d '{"word1":"SEND","word2":"MORE","result":"MONEY","mapping":{"S":9,"E":5,"N":6,"D":7,"M":1,"O":0,"R":8,"Y":2}}'
 ```
 
 - Docker (simple) — run the app in a container:

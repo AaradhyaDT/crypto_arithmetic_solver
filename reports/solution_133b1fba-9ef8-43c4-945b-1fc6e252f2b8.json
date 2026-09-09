@@ -1,0 +1,153 @@
+{
+  "solutions": {
+    "C": 2,
+    "G": 4,
+    "I": 5,
+    "O": 0,
+    "L": 9,
+    "R": 8,
+    "P": 1
+  },
+  "metrics": {
+    "elapsed_seconds": 0.0,
+    "recursive_calls": 82,
+    "assignments": 33,
+    "backtracks": 26,
+    "solutions_found": 1,
+    "fastest_solution_index": 0,
+    "solution_steps": [
+      {
+        "column": 1,
+        "equation": "C(2) + C(2) = G(4)"
+      },
+      {
+        "column": 2,
+        "equation": "I(5) + I(5) = O(0), carry 1"
+      },
+      {
+        "column": 3,
+        "equation": "G(4) + G(4) + carry 1 = L(9)"
+      },
+      {
+        "column": 4,
+        "equation": "O(0) + O(0) = O(0)"
+      },
+      {
+        "column": 5,
+        "equation": "L(9) + L(9) = R(8), carry 1"
+      },
+      {
+        "column": 6,
+        "equation": "carry 1 = P(1)"
+      }
+    ],
+    "reasoning_steps": [
+      {
+        "column": 1,
+        "role": "addend",
+        "char": "C",
+        "chosen": 2,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          }
+        ]
+      },
+      {
+        "column": 1,
+        "role": "result",
+        "char": "G",
+        "chosen": 4,
+        "reason": "forced",
+        "depends_on": [
+          "C=2",
+          "C=2"
+        ],
+        "note": "C=2 and C=2 -> column sum 4, G = 4 % 10 = 4 (carry_in=0)"
+      },
+      {
+        "column": 2,
+        "role": "addend",
+        "char": "I",
+        "chosen": 5,
+        "reason": "chosen",
+        "eliminated": [
+          {
+            "digit": 0,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 1,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 2,
+            "reason": "already taken by C"
+          },
+          {
+            "digit": 3,
+            "reason": "led to a dead end further down the search"
+          },
+          {
+            "digit": 4,
+            "reason": "already taken by G"
+          }
+        ]
+      },
+      {
+        "column": 2,
+        "role": "result",
+        "char": "O",
+        "chosen": 0,
+        "reason": "forced",
+        "depends_on": [
+          "I=5",
+          "I=5"
+        ],
+        "note": "I=5 and I=5 -> column sum 10, O = 10 % 10 = 0 (carry_in=0)"
+      },
+      {
+        "column": 3,
+        "role": "result",
+        "char": "L",
+        "chosen": 9,
+        "reason": "forced",
+        "depends_on": [
+          "G=4",
+          "G=4",
+          "carry 1 (from column 2)"
+        ],
+        "note": "G=4 and G=4 and carry 1 (from column 2) -> column sum 9, L = 9 % 10 = 9 (carry_in=1)"
+      },
+      {
+        "column": 5,
+        "role": "result",
+        "char": "R",
+        "chosen": 8,
+        "reason": "forced",
+        "depends_on": [
+          "L=9",
+          "L=9"
+        ],
+        "note": "L=9 and L=9 -> column sum 18, R = 18 % 10 = 8 (carry_in=0)"
+      },
+      {
+        "column": 6,
+        "role": "result",
+        "char": "P",
+        "chosen": 1,
+        "reason": "forced",
+        "depends_on": [
+          "carry 1 (from column 5)"
+        ],
+        "note": "carry 1 (from column 5) -> column sum 1, P = 1 % 10 = 1 (carry_in=1)"
+      }
+    ]
+  }
+}
