@@ -71,3 +71,34 @@ def test_parse_mapping_formats():
     parsed_json = parse_mapping("{'S': 9, 'E': 5}")
     assert parsed_json["S"] == 9 and parsed_json["E"] == 5
 
+
+def test_check_multiple_solutions():
+    from src.crypto_arithmetic_solver import check_solutions
+    sols = solve_cryptarithmetic_optimized("TWO", "TWO", "FOUR", return_all=True)
+    assert isinstance(sols, list) and len(sols) == 7
+    results = check_solutions("TWO", "TWO", "FOUR", sols)
+    assert len(results) == 7
+    for valid, msg in results:
+        assert valid is True
+        assert "OK:" in msg
+
+
+def test_load_mappings_from_json():
+    from src.crypto_arithmetic_solver import load_mappings_from_json
+    from pathlib import Path
+    path = Path(__file__).resolve().parents[1] / "reports" / "two_four_metrics.json"
+    if path.exists():
+        mappings = load_mappings_from_json(path)
+        assert len(mappings) == 7
+
+
+def test_parse_answer_numbers():
+    from src.crypto_arithmetic_solver import parse_answer
+    mappings = parse_answer("BASE", "BALL", "GAMES", "7483 7455 14938")
+    assert len(mappings) == 1
+    assert mappings[0]["B"] == 7 and mappings[0]["A"] == 4 and mappings[0]["S"] == 8
+    assert mappings[0]["E"] == 3 and mappings[0]["L"] == 5 and mappings[0]["G"] == 1
+    assert mappings[0]["M"] == 9
+
+
+

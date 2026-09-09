@@ -22,35 +22,67 @@ sys.path.insert(0, str(ROOT))
 def cmd_solve(args):
     from src.crypto_arithmetic_solver import solve_cryptarithmetic_optimized
 
+    w1 = args.word1 or input("Enter first addend (word1): ").strip()
+    w2 = args.word2 or input("Enter second addend (word2): ").strip()
+    res = args.result or input("Enter result word: ").strip()
+
     if args.metrics_json:
-        sols, metrics = solve_cryptarithmetic_optimized(args.word1, args.word2, args.result, return_all=args.all, timeout=args.timeout, collect_metrics=True)  # type: ignore[misc]
+        sols, metrics = solve_cryptarithmetic_optimized(w1, w2, res, return_all=args.all, timeout=args.timeout, collect_metrics=True)  # type: ignore[misc]
         import json
         out = {"solutions": sols, "metrics": metrics}
         with open(args.metrics_json, "w", encoding="utf-8") as f:
             json.dump(out, f, indent=2)
         print(args.metrics_json)
     else:
-        sols = solve_cryptarithmetic_optimized(args.word1, args.word2, args.result, return_all=args.all, timeout=args.timeout)
+        sols = solve_cryptarithmetic_optimized(w1, w2, res, return_all=args.all, timeout=args.timeout)
         print(sols)
 
 
 def cmd_check(args):
-    from src.crypto_arithmetic_solver import check_solution, parse_mapping, load_mapping_from_json
+    from src.crypto_arithmetic_solver import check_solution, parse_answer
 
-    if not args.mapping and not args.mapping_json:
-        print("Error: check command requires --mapping or --mapping-json", file=sys.stderr)
-        sys.exit(1)
+    w1 = args.word1 or input("Enter first addend (word1): ").strip()
+    w2 = args.word2 or input("Enter second addend (word2): ").strip()
+    res = args.result or input("Enter result word: ").strip()
+
+    raw_answer = None
+    if args.answer:
+        raw_answer = " ".join(args.answer)
+    elif args.mapping:
+        raw_answer = args.mapping
+    elif args.mapping_json:
+        raw_answer = args.mapping_json
+    else:
+        raw_answer = input(f"Enter answer for {w1} + {w2} = {res} (mapping, numbers, or JSON file): ").strip()
 
     try:
-        mapping = load_mapping_from_json(args.mapping_json) if args.mapping_json else parse_mapping(args.mapping)
+        mappings = parse_answer(w1, w2, res, raw_answer)
     except Exception as e:
-        print(f"Error reading/parsing mapping: {e}", file=sys.stderr)
+        print(f"Error reading/parsing answer: {e}", file=sys.stderr)
         sys.exit(1)
 
-    valid, msg = check_solution(args.word1, args.word2, args.result, mapping)
-    print(f"Valid: {valid}")
-    print(msg)
-    sys.exit(0 if valid else 1)
+    if not mappings:
+        print("No solutions found to check.", file=sys.stderr)
+        sys.exit(1)
+
+    if len(mappings) == 1:
+        valid, msg = check_solution(w1, w2, res, mappings[0])
+        print(f"Valid: {valid}")
+        print(msg)
+        sys.exit(0 if valid else 1)
+    else:
+        print(f"Checking {len(mappings)} solution(s) for {w1} + {w2} = {res}:")
+        all_valid = True
+        valid_count = 0
+        for idx, m in enumerate(mappings, start=1):
+            valid, msg = check_solution(w1, w2, res, m)
+            if valid:
+                valid_count += 1
+            else:
+                all_valid = False
+            print(f"  [{idx}/{len(mappings)}] Valid: {valid} -> {msg}")
+        print(f"\nResult: {valid_count} of {len(mappings)} solution(s) valid.")
+        sys.exit(0 if all_valid else 1)
 
 
 def cmd_export(_):
@@ -74,20 +106,21 @@ def main():
     parser = argparse.ArgumentParser(prog="cli")
     sub = parser.add_subparsers(dest="cmd")
 
-    p = sub.add_parser("solve")
-    p.add_argument("word1")
-    p.add_argument("word2")
-    p.add_argument("result")
+    p = sub.add_parser("solve", help="Solve a puzzle")
+    p.add_argument("word1", nargs="?", default=None, help="First addend")
+    p.add_argument("word2", nargs="?", default=None, help="Second addend")
+    p.add_argument("result", nargs="?", default=None, help="Result word")
     p.add_argument("--all", action="store_true")
     p.add_argument("--timeout", type=float, default=None)
     p.add_argument("--metrics-json", default=None)
 
-    p_check = sub.add_parser("check")
-    p_check.add_argument("word1")
-    p_check.add_argument("word2")
-    p_check.add_argument("result")
-    p_check.add_argument("--mapping", default=None, help="Mapping as JSON or key=val pairs (e.g. S=9,E=5,...)")
-    p_check.add_argument("--mapping-json", default=None, help="Path to JSON file containing mapping")
+    p_check = sub.add_parser("check", help="Check a candidate solution for a puzzle")
+    p_check.add_argument("word1", nargs="?", default=None, help="First addend")
+    p_check.add_argument("word2", nargs="?", default=None, help="Second addend")
+    p_check.add_argument("result", nargs="?", default=None, help="Result word")
+    p_check.add_argument("answer", nargs="*", default=None, help="Answer as numbers (7483 7455 14938), mapping (A=4,B=7...), or JSON file")
+    p_check.add_argument("--mapping", default=None, help="Mapping as JSON or key=val pairs")
+    p_check.add_argument("--mapping-json", default=None, help="Path to JSON file containing mapping(s)")
 
     sub.add_parser("export")
 

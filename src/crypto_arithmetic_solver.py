@@ -464,6 +464,22 @@ def check_solution(
     return True, f"OK: {n1} + {n2} = {nr}"
 
 
+def check_solutions(
+    word1: str,
+    word2: str,
+    result: str,
+    mappings: List[Dict[str, Union[int, str]]],
+) -> List[Tuple[bool, str]]:
+    """Verify a list of candidate mappings for word1 + word2 = result.
+
+    Returns:
+      List of (is_valid, message) tuples for each candidate mapping.
+    """
+    if not mappings:
+        return []
+    return [check_solution(word1, word2, result, m) for m in mappings]
+
+
 def parse_mapping(mapping_str: str) -> Dict[str, int]:
     """Parse a mapping string into a dict of {str: int}.
 
@@ -503,28 +519,139 @@ def parse_mapping(mapping_str: str) -> Dict[str, int]:
     return res
 
 
-def load_mapping_from_json(path_or_str: Union[str, Any]) -> Dict[str, int]:
-    """Extract a solution mapping from a JSON file path.
+def parse_mappings(mapping_str: str) -> List[Dict[str, int]]:
+    """Parse one or more mappings from a string.
 
     Supports:
-      - Direct dict: {"S": 9, ...}
-      - Solver metrics output: {"solutions": [{"S": 9, ...}], "metrics": ...}
-      - Solver metrics with single solution dict: {"solutions": {"S": 9, ...}}
+      - JSON array of objects: '[{"S": 9, ...}, {"S": 8, ...}]'
+      - Single JSON object or delimited string: '{"S": 9, ...}' or 'S=9, E=5, ...'
+    """
+    mapping_str = mapping_str.strip()
+    if mapping_str.startswith("[") and mapping_str.endswith("]"):
+        import json
+        for candidate in (mapping_str, mapping_str.replace("'", '"')):
+            try:
+                raw_list = json.loads(candidate)
+                if isinstance(raw_list, list):
+                    return [
+                        {str(k).strip().upper(): int(v) for k, v in item.items()}
+                        for item in raw_list
+                        if isinstance(item, dict)
+                    ]
+            except Exception:
+                pass
+    return [parse_mapping(mapping_str)]
+
+
+def load_mappings_from_json(path_or_str: Union[str, Any]) -> List[Dict[str, int]]:
+    """Extract all solution mappings from a JSON file path.
+
+    Supports:
+      - Direct dict: {"S": 9, ...} -> [{"S": 9, ...}]
+      - List of dicts: [{"S": 9, ...}, ...] -> list of dicts
+      - Solver metrics output: {"solutions": [...], "metrics": ...} -> list of solution dicts
+      - Puzzles report dict: {"TWO+TWO=FOUR": {"solutions": [...]}} -> list of solutions
     """
     import json
     from pathlib import Path
     data = json.loads(Path(path_or_str).read_text(encoding="utf-8"))
+
+    if isinstance(data, list):
+        return [
+            {str(k).strip().upper(): int(v) for k, v in item.items()}
+            for item in data
+            if isinstance(item, dict)
+        ]
+
     if isinstance(data, dict):
         if "solutions" in data:
             sols = data["solutions"]
-            if isinstance(sols, list) and sols:
-                return {str(k).strip().upper(): int(v) for k, v in sols[0].items()}
+            if isinstance(sols, list):
+                return [
+                    {str(k).strip().upper(): int(v) for k, v in item.items()}
+                    for item in sols
+                    if isinstance(item, dict)
+                ]
             elif isinstance(sols, dict):
-                return {str(k).strip().upper(): int(v) for k, v in sols.items()}
-        return {str(k).strip().upper(): int(v) for k, v in data.items() if str(k) not in ("metrics",)}
-    elif isinstance(data, list) and data:
-        return {str(k).strip().upper(): int(v) for k, v in data[0].items()}
-    raise ValueError(f"Unable to extract letter mapping from {path_or_str}")
+                return [{str(k).strip().upper(): int(v) for k, v in sols.items()}]
+
+        for val in data.values():
+            if isinstance(val, dict) and "solutions" in val and isinstance(val["solutions"], list):
+                return [
+                    {str(k).strip().upper(): int(v) for k, v in item.items()}
+                    for item in val["solutions"]
+                    if isinstance(item, dict)
+                ]
+
+        keys_to_skip = {"metrics", "solutions_count", "solution_steps", "reasoning_steps", "leading_bound", "fastest_solution_index"}
+        return [{str(k).strip().upper(): int(v) for k, v in data.items() if str(k) not in keys_to_skip}]
+
+    raise ValueError(f"Unable to extract letter mapping(s) from {path_or_str}")
+
+
+def load_mapping_from_json(path_or_str: Union[str, Any]) -> Dict[str, int]:
+    """Extract a single solution mapping from a JSON file path (first solution if multiple)."""
+    mappings = load_mappings_from_json(path_or_str)
+    if not mappings:
+        raise ValueError(f"No mappings found in {path_or_str}")
+    return mappings[0]
+
+
+def parse_answer(
+    word1: str,
+    word2: str,
+    result: str,
+    answer_input: Union[str, Any],
+) -> List[Dict[str, int]]:
+    """Parse an answer into one or more candidate letter-to-digit mappings.
+
+    Supported formats:
+      1. Path to JSON file (e.g. reports/solution_xxx.json).
+      2. JSON array or object string (e.g. '[{"S":9,...}]' or '{"S":9,...}').
+      3. Three numbers matching the words (e.g. '7483 7455 14938', '7483 + 7455 = 14938',
+         or 'BASE=7483, BALL=7455, GAMES=14938').
+      4. Key-value string pairs (e.g. 'A=4, B=7, E=3, G=1, L=5, M=9, S=8').
+    """
+    import re
+    from pathlib import Path
+
+    raw_str = str(answer_input).strip()
+
+    # 1. Check if it's a file
+    clean_path_str = raw_str.strip("\"' ")
+    try:
+        p = Path(clean_path_str)
+        if p.is_file() or clean_path_str.endswith(".json"):
+            return load_mappings_from_json(clean_path_str)
+    except Exception:
+        pass
+
+    # 2. Check if JSON array or JSON object
+    if (raw_str.startswith("[") and raw_str.endswith("]")) or (raw_str.startswith("{") and raw_str.endswith("}")):
+        try:
+            return parse_mappings(raw_str)
+        except Exception:
+            pass
+
+    # 3. Check for 3 numbers (addend1, addend2, result)
+    digit_tokens = re.findall(r"\b\d+\b", raw_str)
+    w1, w2, res = word1.strip().upper(), word2.strip().upper(), result.strip().upper()
+    if len(digit_tokens) == 3:
+        n1, n2, nr = digit_tokens
+        if len(n1) == len(w1) and len(n2) == len(w2) and len(nr) == len(res):
+            mapping: Dict[str, int] = {}
+            for w, tok in [(w1, n1), (w2, n2), (res, nr)]:
+                for char, d_char in zip(w, tok):
+                    d_int = int(d_char)
+                    if char in mapping and mapping[char] != d_int:
+                        raise ValueError(
+                            f"Inconsistent digit for letter '{char}': assigned both {mapping[char]} and {d_int} in answer numbers."
+                        )
+                    mapping[char] = d_int
+            return [mapping]
+
+    # 4. Delimited pairs (A=4, B=7...)
+    return parse_mappings(raw_str)
 
 
 if __name__ == "__main__":
@@ -532,32 +659,71 @@ if __name__ == "__main__":
     import sys
 
     parser = argparse.ArgumentParser(description="Crypto-arithmetic solver and checker")
-    parser.add_argument("word1")
-    parser.add_argument("word2")
-    parser.add_argument("result")
+    parser.add_argument("word1", nargs="?", default=None, help="First addend (e.g. SEND)")
+    parser.add_argument("word2", nargs="?", default=None, help="Second addend (e.g. MORE)")
+    parser.add_argument("result", nargs="?", default=None, help="Result word (e.g. MONEY)")
+    parser.add_argument("answer", nargs="*", default=None, help="Optional answer to check (mapping, numbers, or JSON file)")
     parser.add_argument("--all", action="store_true", help="Return all solutions")
     parser.add_argument("--timeout", type=float, default=None, help="Timeout in seconds")
     parser.add_argument("--max-solutions", type=int, default=None)
     parser.add_argument("--metrics-json", type=str, default=None, help="Write solutions+metrics to JSON file")
-    parser.add_argument("--check", action="store_true", help="Check if provided mapping is a valid solution")
+    parser.add_argument("--check", action="store_true", help="Check if provided mapping(s) solve the puzzle")
     parser.add_argument("--mapping", type=str, default=None, help="Mapping as JSON or key=val pairs (e.g. S=9,E=5,...)")
-    parser.add_argument("--mapping-json", type=str, default=None, help="Path to JSON file containing mapping")
+    parser.add_argument("--mapping-json", type=str, default=None, help="Path to JSON file containing mapping(s)")
     args = parser.parse_args()
 
-    if args.check:
-        if not args.mapping and not args.mapping_json:
-            parser.error("--check requires --mapping or --mapping-json")
-        mapping = load_mapping_from_json(args.mapping_json) if args.mapping_json else parse_mapping(args.mapping)
-        valid, msg = check_solution(args.word1, args.word2, args.result, mapping)
-        print(f"Valid: {valid}")
-        print(msg)
-        sys.exit(0 if valid else 1)
+    # Prompt interactively if words are not supplied
+    w1 = args.word1 or input("Enter first addend (word1): ").strip()
+    w2 = args.word2 or input("Enter second addend (word2): ").strip()
+    res = args.result or input("Enter result word: ").strip()
+
+    is_checking = args.check or bool(args.answer) or bool(args.mapping) or bool(args.mapping_json)
+
+    if is_checking:
+        raw_ans = None
+        if args.answer:
+            raw_ans = " ".join(args.answer)
+        elif args.mapping:
+            raw_ans = args.mapping
+        elif args.mapping_json:
+            raw_ans = args.mapping_json
+        else:
+            raw_ans = input(f"Enter answer for {w1} + {w2} = {res} (mapping, numbers, or JSON file): ").strip()
+
+        try:
+            mappings = parse_answer(w1, w2, res, raw_ans)
+        except Exception as e:
+            print(f"Error parsing answer: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        if not mappings:
+            print("No solutions found to check.", file=sys.stderr)
+            sys.exit(1)
+
+        if len(mappings) == 1:
+            valid, msg = check_solution(w1, w2, res, mappings[0])
+            print(f"Valid: {valid}")
+            print(msg)
+            sys.exit(0 if valid else 1)
+        else:
+            print(f"Checking {len(mappings)} solution(s) for {w1} + {w2} = {res}:")
+            all_valid = True
+            valid_count = 0
+            for idx, m in enumerate(mappings, start=1):
+                valid, msg = check_solution(w1, w2, res, m)
+                if valid:
+                    valid_count += 1
+                else:
+                    all_valid = False
+                print(f"  [{idx}/{len(mappings)}] Valid: {valid} -> {msg}")
+            print(f"\nResult: {valid_count} of {len(mappings)} solution(s) valid.")
+            sys.exit(0 if all_valid else 1)
 
     if args.metrics_json:
         sols, metrics = solve_cryptarithmetic_optimized(  # type: ignore[misc]
-            args.word1,
-            args.word2,
-            args.result,
+            w1,
+            w2,
+            res,
             return_all=args.all,
             max_solutions=args.max_solutions,
             timeout=args.timeout,
@@ -571,6 +737,6 @@ if __name__ == "__main__":
         print(args.metrics_json)
     else:
         sol = solve_cryptarithmetic_optimized(
-            args.word1, args.word2, args.result, return_all=args.all, max_solutions=args.max_solutions, timeout=args.timeout
+            w1, w2, res, return_all=args.all, max_solutions=args.max_solutions, timeout=args.timeout
         )
         print(sol)

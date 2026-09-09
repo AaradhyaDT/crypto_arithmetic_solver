@@ -13,14 +13,30 @@ Quick commands
 ```python src/crypto_arithmetic_solver.py SEND MORE MONEY --metrics-json reports/send_more_metrics.json --timeout 2
 ```
 
+- Check a solution using the PowerShell helper (interactive, same as solver):
+
+```powershell
+pwsh .\check_solution.ps1
+# Prompts for word1, word2, result, and answer (numbers, mapping, or JSON file)
+
+# Or parameterized:
+pwsh .\check_solution.ps1 -Word1 BASE -Word2 BALL -Result GAMES -Answer "7483 7455 14938"
+```
+
 - Check a candidate solution using the CLI:
 
 ```bash
+# Using numbers directly:
+python cli.py check BASE BALL GAMES 7483 7455 14938
+
 # Using key=value pairs:
-python cli.py check SEND MORE MONEY --mapping "S=9,E=5,N=6,D=7,M=1,O=0,R=8,Y=2"
+python cli.py check SEND MORE MONEY "S=9,E=5,N=6,D=7,M=1,O=0,R=8,Y=2"
 
 # Using a saved JSON file or solver output:
-python cli.py check SEND MORE MONEY --mapping-json reports/send_more_metrics.json
+python cli.py check SEND MORE MONEY reports/send_more_metrics.json
+
+# Interactive mode (prompts for qn and ans if omitted):
+python cli.py check
 ```
 
 - Generate reports for the suite of puzzles (JSON + Markdown):
@@ -123,6 +139,9 @@ If you reorganize files, ensure `src` remains a package (has `__init__.py`) so t
   - Verifies character coverage, digit range (0-9), uniqueness of mapped digits, absence of leading zeros on multi-letter words, and exact mathematical equality (`word1 + word2 == result`).
   - Returns `(True, "OK: <n1> + <n2> = <nr>")` or `(False, "<reason>")`.
 
+- `check_solutions(word1: str, word2: str, result: str, mappings: List[Dict[str, Union[int, str]]]) -> List[Tuple[bool, str]]`
+  - Validates a list of candidate mappings for the puzzle.
+
 ## Usage
 
 Run the file as a script to execute a small built-in CLI test harness (arguments: `word1 word2 result`). Example:
@@ -131,23 +150,28 @@ Run the file as a script to execute a small built-in CLI test harness (arguments
 python src/crypto_arithmetic_solver.py SEND MORE MONEY
 ```
 
-To check a solution:
+To check a single or multiple solutions:
 
 ```bash
+# Single solution via key=value:
 python src/crypto_arithmetic_solver.py SEND MORE MONEY --check --mapping "S=9,E=5,N=6,D=7,M=1,O=0,R=8,Y=2"
+
+# Multiple solutions via JSON file or JSON array:
+python cli.py check TWO TWO FOUR --mapping-json reports/two_four_metrics.json
 ```
 
 Or import the functions into other modules:
 
 ```python
-from src.crypto_arithmetic_solver import solve_cryptarithmetic_optimized, check_solution
+from src.crypto_arithmetic_solver import solve_cryptarithmetic_optimized, check_solution, check_solutions
 
-# Solve:
-solution = solve_cryptarithmetic_optimized("SEND", "MORE", "MONEY")
+# Solve all solutions:
+solutions = solve_cryptarithmetic_optimized("TWO", "TWO", "FOUR", return_all=True)
 
-# Check:
-valid, message = check_solution("SEND", "MORE", "MONEY", solution)
-print(valid, message)  # True, OK: 9567 + 1085 = 10652
+# Check all solutions:
+results = check_solutions("TWO", "TWO", "FOUR", solutions)
+for valid, message in results:
+    print(valid, message)
 ```
 
 ## Complexity

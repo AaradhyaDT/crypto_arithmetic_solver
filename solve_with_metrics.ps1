@@ -2,9 +2,19 @@ Param(
     [string]$Word1,
     [string]$Word2,
     [string]$Result,
+    [string]$Answer,
+    [switch]$Check,
     [switch]$All,
     [double]$Timeout = 2
 )
+
+# Check mode delegation if requested
+if ($Check -or $Answer) {
+    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+    $checkScript = Join-Path $scriptDir 'check_solution.ps1'
+    & $checkScript -Word1 $Word1 -Word2 $Word2 -Result $Result -Answer $Answer
+    exit $LASTEXITCODE
+}
 
 # Prompt if any are missing
 if (-not $Word1) { $Word1 = Read-Host "Enter first addend (word1)" }
