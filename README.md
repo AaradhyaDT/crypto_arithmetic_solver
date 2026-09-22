@@ -5,6 +5,28 @@
 - `tests/` — simple test runner: `run_unit_tests.py`
 - `reports/` — generated outputs: `puzzles_metrics.json`, `puzzles_metrics_report.md`
 - `docs/` — human-readable docs
+- `sync.ps1` — central Git workflow, unit test gate, and secret scanner synchronizer
+
+---
+
+## Repository Synchronization (`sync.ps1`)
+
+Version control for `crypto_arithmetic_solver` is managed via `sync.ps1` to enforce test gates and prevent secret leakage:
+
+```powershell
+.\sync.ps1                                   # Routine sync (secret scan, commit, rebase-push)
+.\sync.ps1 -RunTests                         # Run full unit test suite (tests/run_unit_tests.py) then sync
+.\sync.ps1 -m "feat(solver): custom message" # Scoped conventional commit message
+.\sync.ps1 -PullOnly                         # Safely rebase and pull from origin/main
+.\sync.ps1 -WhatIf                           # Dry-run inspection without altering git state
+```
+
+- **Unit Test Gate (`-RunTests`)**: Executes `tests/run_unit_tests.py` and aborts if any test fails.
+- **Pre-Commit Secret Guard**: Blocks committing API keys, tokens, or private credentials.
+- **Intelligent Conventional Commits**: Auto-classifies changes (`feat(solver)`, `test(solver)`, `docs(solver)`, `ci(solver)`).
+- **Safe Rebase**: Rebase and autostash against `origin/main` before pushing.
+
+---
 
 Quick commands
 
